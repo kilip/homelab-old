@@ -21,12 +21,12 @@ cniConfig:
 nodes:
   - hostname: "k8s-1"
     ipAddress: "10.10.10.11"
-    installDisk: "/dev/nvme0n1"
+    installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "02:42:0a:05:00:02"
+          hardwareAddr: "08:00:27:78:89:c3"
         dhcp: false
         addresses:
           - "10.10.10.11/24"
