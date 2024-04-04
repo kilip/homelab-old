@@ -1,0 +1,12 @@
+---
+creation_rules:
+  - # IMPORTANT: This rule MUST be above the others
+    path_regex: talos/.*\.sops\.ya?ml
+    key_groups:
+      - age:
+          - "age1j9n9mq2enuf92rrhnhxacgwv7kd8d4sf94eae9l6thc77e4ktu6swq52cm"
+  - path_regex: (cluster|staging)/.*\.sops\.ya?ml
+    encrypted_regex: "^(data|stringData)$"
+    key_groups:
+      - age:
+          - "age1j9n9mq2enuf92rrhnhxacgwv7kd8d4sf94eae9l6thc77e4ktu6swq52cm"

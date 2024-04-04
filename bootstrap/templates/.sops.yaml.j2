@@ -7,7 +7,7 @@ creation_rules:
       - age:
           - "#{ bootstrap_sops_age_pubkey }#"
   #% endif %#
-  - path_regex: kubernetes/.*\.sops\.ya?ml
+  - path_regex: (cluster|staging)/.*\.sops\.ya?ml
     encrypted_regex: "^(data|stringData)$"
     key_groups:
       - age:
