@@ -33,7 +33,7 @@ nodes:
         mtu: 1500
         routes:
           - network: 0.0.0.0/0
-            gateway: "10.5.0.1/24"
+            gateway: "10.5.0.1"
         vip:
           ip: "10.5.0.254"
   - hostname: "k8s-2"
@@ -50,7 +50,7 @@ nodes:
         mtu: 1500
         routes:
           - network: 0.0.0.0/0
-            gateway: "10.5.0.1/24"
+            gateway: "10.5.0.1"
 
 patches:
   # Configure containerd
