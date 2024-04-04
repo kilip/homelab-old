@@ -10,7 +10,7 @@ vars:
   # Directories
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/bootstrap"
-  KUBERNETES_DIR: "{{.ROOT_DIR}}/cluster"
+  KUBERNETES_DIR: "{{.ROOT_DIR}}/{{.DEPLOY}}"
   PRIVATE_DIR: "{{.ROOT_DIR}}/.private"
   SCRIPTS_DIR: "{{.ROOT_DIR}}/scripts"
   # Files
@@ -21,6 +21,7 @@ vars:
   PIP_REQUIREMENTS_FILE: "{{.ROOT_DIR}}/requirements.txt"
   # Binaries
   PYTHON_BIN: python3
+  DEPLOY: '{{ or .DEPLOY "live" }}'
 
 env:
   KUBECONFIG: "{{.KUBECONFIG_FILE}}"
@@ -50,7 +51,8 @@ tasks:
 
   test:
     cmds:
-      - echo "{{ .BOOTSTRAP_ENVIRONMENT }}"
+      - echo "{{.KUBERNETES_DIR}}"
+
   init:
     desc: Initialize configuration files
     cmds:
