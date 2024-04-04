@@ -6,13 +6,13 @@ talosVersion: v1.6.7
 kubernetesVersion: v1.29.3
 
 clusterName: &cluster olympus
-endpoint: https://10.5.0.254:6443
+endpoint: https://10.10.10.254:6443
 clusterPodNets:
   - "10.69.0.0/16"
 clusterSvcNets:
   - "10.96.0.0/16"
 additionalApiServerCertSans: &sans
-  - "10.5.0.254"
+  - "10.10.10.254"
   - 127.0.0.1 # KubePrism
 additionalMachineCertSans: *sans
 cniConfig:
@@ -20,7 +20,7 @@ cniConfig:
 
 nodes:
   - hostname: "k8s-1"
-    ipAddress: "10.5.0.2"
+    ipAddress: "10.10.10.11"
     installDisk: "/dev/nvme0n1"
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: true
@@ -29,28 +29,13 @@ nodes:
           hardwareAddr: "02:42:0a:05:00:02"
         dhcp: false
         addresses:
-          - "10.5.0.2/24"
+          - "10.10.10.11/24"
         mtu: 1500
         routes:
           - network: 0.0.0.0/0
-            gateway: "10.5.0.1"
+            gateway: "10.10.10.1"
         vip:
-          ip: "10.5.0.254"
-  - hostname: "k8s-2"
-    ipAddress: "10.5.0.3"
-    installDisk: "/dev/nvme0n1"
-    talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
-    controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "02:42:0a:05:00:03"
-        dhcp: false
-        addresses:
-          - "10.5.0.3/24"
-        mtu: 1500
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "10.5.0.1"
+          ip: "10.10.10.254"
 
 patches:
   # Configure containerd
@@ -91,7 +76,7 @@ patches:
         extraArgs:
           rotate-server-certificates: true
         nodeIP:
-          validSubnets: ["10.5.0.0/24"]
+          validSubnets: ["10.10.10.0/24"]
 
   # Force nameserver
   - |-
@@ -153,7 +138,7 @@ controlPlane:
           extraArgs:
             listen-metrics-urls: http://0.0.0.0:2381
           advertisedSubnets:
-            - "10.5.0.0/24"
+            - "10.10.10.0/24"
 
     # Disable default API server admission plugins.
     - |-
