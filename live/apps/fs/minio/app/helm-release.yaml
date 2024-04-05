@@ -25,10 +25,11 @@ spec:
   values:
     controllers:
       minio:
+        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: quay.io/minio/minio
               tag: RELEASE.2024-03-30T09-41-56Z
@@ -58,46 +59,33 @@ spec:
               - secretRef:
                   name: minio-secret
     service:
-      main:
+      app:
         controller: minio
         ports:
           http:
             port: 9001
           api:
             port: 9000
+
     ingress:
-      main:
-        enabled: true
-        className: nginx
+      app:
+        className: "external"
         hosts:
-          - host: &host minio.${SECRET_DOMAIN}
+          - host: &host "minio.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
                 service:
-                  identifier: main
+                  identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
-            secretName: ${SECRET_DOMAIN//./-}-${SECRET_CERT}-tls
-      s3:
-        enabled: true
-        className: nginx
-        hosts:
-          - host: &host s3.${SECRET_DOMAIN}
+          - host: &host "s3.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
                 service:
-                  identifier: main
-                  port: api
-        tls:
-          - hosts:
-              - *host
-            secretName: ${SECRET_DOMAIN//./-}-${SECRET_CERT}-tls
+                  identifier: app
+                  port: s3
+
     serviceMonitor:
-      main:
+      app:
         serviceName: minio
         enabled: true
         endpoints:
@@ -106,6 +94,7 @@ spec:
             path: /minio/v2/metrics/cluster
             interval: 1m
             scrapeTimeout: 10s
+
     persistence:
       config:
         enabled: true
