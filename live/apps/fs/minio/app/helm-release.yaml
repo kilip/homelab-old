@@ -85,7 +85,7 @@ spec:
                   identifier: app
                   port: s3
         tls:
-          - hosts: [*host, *s3Host]
+          - hosts: [*host, *s3host]
 
     serviceMonitor:
       app:
