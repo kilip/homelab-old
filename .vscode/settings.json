@@ -1,7 +1,7 @@
 {
     "ansible.ansible.path": ".venv/bin/ansible",
     "ansible.python.activationScript": ".venv/bin/activate",
-    "ansible.python.interpreterPath": ".venv/bin/python3",
+    "ansible.python.interpreterPath": ".venv/bin/python",
     "ansible.validation.enabled": true,
     "ansible.validation.lint.arguments": "-c ansible/.ansible-lint",
     "ansible.validation.lint.enabled": true,
@@ -16,7 +16,8 @@
     "sops.defaults.ageKeyFile": "age.key",
     "yaml.schemas": {
         "ansible": "./ansible/*.yaml",
-        "Kubernetes": "./kubernetes/*.yaml"
+        "Kubernetes": "./kubernetes/*.yaml",
+        "https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json": "file:///home/toni/code/homelab/live/apps/fs/minio/helm-release.yaml"
     },
     "vs-kubernetes": {
         "vs-kubernetes.kubeconfig": "./kubeconfig",
