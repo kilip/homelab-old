@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: "ssh://git@github.com:kilip/homelab.git"
+  url: "ssh://git@github.com/kilip/homelab.git"
   secretRef:
     name: github-deploy-key
   ref:
@@ -16,6 +16,7 @@ spec:
     /*
     # include kubernetes directory
     !/staging
+    !/live
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

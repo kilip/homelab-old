@@ -1,0 +1,13 @@
+---
+kubernetes:
+  children:
+    controllers:
+      hosts:
+        "k8s-1":
+          ansible_user: "toni"
+          ansible_host: "10.10.10.11"
+    workers:
+      hosts:
+        "k8s-2":
+          ansible_user: "toni"
+          ansible_host: "10.10.10.12"
