@@ -27,7 +27,7 @@ spec:
       replicaCount: 1
       service:
         annotations:
-          io.cilium/lb-ipam-ips: "10.0.1.253"
+          io.cilium/lb-ipam-ips: "${INGRESS_INTERNAL_VIP}"
         externalTrafficPolicy: Cluster
       ingressClassResource:
         name: internal
