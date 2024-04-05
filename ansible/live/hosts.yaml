@@ -1,0 +1,13 @@
+---
+kubernetes:
+  children:
+    controllers:
+      hosts:
+        "mars":
+          ansible_user: "toni"
+          ansible_host: "10.0.1.11"
+    workers:
+      hosts:
+        "hera":
+          ansible_user: "toni"
+          ansible_host: "10.0.1.12"
