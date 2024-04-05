@@ -68,20 +68,24 @@ spec:
 
     ingress:
       app:
-        className: "internal"
+        className: "external"
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hosts:
-          - host: "minio.${SECRET_DOMAIN}"
+          - host: &host "minio.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
-          - host: "s3.${SECRET_DOMAIN}"
+          - host: &s3host "s3.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: s3
+        tls:
+          - hosts: [*host, *s3Host]
 
     serviceMonitor:
       app:
