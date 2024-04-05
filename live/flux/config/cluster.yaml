@@ -6,9 +6,11 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: "https://github.com/kilip/homelab"
+  url: "ssh://git@github.com:kilip/homelab.git"
+  secretRef:
+    name: github-deploy-key
   ref:
-    branch: "staging"
+    branch: "main"
   ignore: |
     # exclude all
     /*
