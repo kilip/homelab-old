@@ -9,8 +9,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: cert-manager-issuers
+  #dependsOn:
+  #  - name: cert-manager-issuers
   path: ./live/apps/network/ingress-nginx/certificates
   prune: true
   sourceRef:
