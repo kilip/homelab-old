@@ -10,7 +10,7 @@ vars:
   # Directories
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/bootstrap"
-  KUBERNETES_DIR: "{{.ROOT_DIR}}/{{.DEPLOY}}"
+  KUBERNETES_DIR: '{{.ROOT_DIR}}/{{or .DEPLOY "live"}}'
   PRIVATE_DIR: "{{.ROOT_DIR}}/.private"
   SCRIPTS_DIR: "{{.ROOT_DIR}}/scripts"
   # Files
