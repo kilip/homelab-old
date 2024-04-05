@@ -1,15 +1,32 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/persistentvolumeclaim-v1.json
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: &name minio-nfs
+spec:
+  storageClassName: *name
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: "${NFS_IP}"
+    path: /tank/minio
+  mountOptions:
+    - nfsvers=4
+    - nconnect=8
+    - hard
+    - noatime
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: minio-nfs
-  labels:
-    app.kubernetes.io/name: minio
+  name: &name minio-nfs
 spec:
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
+  storageClassName: *name
   resources:
     requests:
-      storage: 500Gi
-  storageClassName: nfs-provisioner
+      storage: 1Mi
