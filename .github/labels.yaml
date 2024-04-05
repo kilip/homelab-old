@@ -3,7 +3,8 @@
 - { name: "area/ansible",            color: "0e8a16" }
 - { name: "area/bootstrap",          color: "0e8a16" }
 - { name: "area/github",             color: "0e8a16" }
-- { name: "area/kubernetes",         color: "0e8a16" }
+- { name: "area/live",               color: "0e8a16" }
+- { name: "area/staging",            color: "0e8a16" }
 - { name: "area/taskfile",           color: "0e8a16" }
 # Distro
 - { name: "distro/k3s",              color: "ffc300" }

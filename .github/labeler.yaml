@@ -8,9 +8,12 @@ area/bootstrap:
 area/github:
   - changed-files:
       - any-glob-to-any-file: .github/**/*
-area/kubernetes:
+area/live:
   - changed-files:
-      - any-glob-to-any-file: kubernetes/**/*
+      - any-glob-to-any-file: live/**/*
+area/staging:
+  - changed-files:
+      - any-glob-to-any-file: staging/**/*
 area/taskfile:
   - changed-files:
       - any-glob-to-any-file: .taskfiles/**/*
