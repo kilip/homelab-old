@@ -23,7 +23,7 @@ spec:
       hostRoot: /sys/fs/cgroup
     cluster:
       id: 1
-      name: olympus
+      name: staging
     containerRuntime:
       integration: containerd
       socketPath: /var/run/k3s/containerd/containerd.sock
