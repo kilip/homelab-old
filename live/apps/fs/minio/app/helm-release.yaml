@@ -81,13 +81,13 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
           - host: &s3host "s3.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: s3
         tls:
           - hosts: [*host, *s3host]
