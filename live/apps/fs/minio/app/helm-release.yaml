@@ -28,7 +28,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          main:
             image:
               repository: quay.io/minio/minio
               tag: RELEASE.2024-03-30T09-41-56Z
@@ -63,7 +63,7 @@ spec:
               - secretRef:
                   name: minio-secret
     service:
-      app:
+      main:
         controller: minio
         ports:
           http:
@@ -72,7 +72,7 @@ spec:
             port: 9000
 
     ingress:
-      app:
+      main:
         className: "internal"
         #annotations:
         #  external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
@@ -93,7 +93,7 @@ spec:
           - hosts: [*host, *s3host]
 
     serviceMonitor:
-      app:
+      main:
         serviceName: minio
         enabled: true
         endpoints:
