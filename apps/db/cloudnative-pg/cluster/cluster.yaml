@@ -8,7 +8,7 @@ metadata:
   annotations:
     kyverno.io/ignore: "true"
 spec:
-  instances: 3
+  instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:14.5
   primaryUpdateStrategy: unsupervised
   storage:
@@ -18,7 +18,7 @@ spec:
     name: postgres-secret
   bootstrap:
     recovery:
-      source: &previous-cluster postgres-v7
+      source: &previous-cluster postgres-v1
   postgresql:
     parameters:
       max_connections: "300"
@@ -35,7 +35,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: s3.staging.itstoni.com
-      serverName: postgres-v8
+      serverName: postgres-v2
       s3Credentials:
         accessKeyId:
           name: cnpg-secret
