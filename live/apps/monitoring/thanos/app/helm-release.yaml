@@ -33,7 +33,7 @@ spec:
         config:
           insecure: true
           bucket: "${THANOS_BUCKET}"
-          endpoint: "s3.itstoni.com"
+          endpoint: "minio.fs.svc.cluster.local:9000"
           region: ""
           access_key: "${S3_ACCESS_KEY}"
           secret_key: "${S3_SECRET_KEY}"
