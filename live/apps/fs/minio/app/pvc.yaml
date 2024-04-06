@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "${NFS_IP}"
-    path: /tank/minio
+    path: ${MINIO_NFS_PATH}
   mountOptions:
     - nfsvers=4
     - nconnect=8
