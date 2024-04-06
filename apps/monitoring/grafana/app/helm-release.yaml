@@ -68,7 +68,7 @@ spec:
         oauth_auto_login: true
       auth.generic_oauth:
         name: authentik
-        enabled: true
+        enabled: false
         scopes: "openid profile email"
         auth_url: "https://sso.${SECRET_DOMAIN}/application/o/authorize/"
         token_url: "https://sso.${SECRET_DOMAIN}/application/o/token/"
