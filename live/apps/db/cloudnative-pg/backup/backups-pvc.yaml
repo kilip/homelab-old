@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-backups
+  namespace: dbms
+spec:
+  storageClassName: postgres-backups
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${NFS_IP}
+    path: "/tank/backup/${DEPLOY}/postgres"
+  mountOptions:
+    - nfsvers=4
+    - tcp
+    - hard
+    - noatime
+    - nodiratime
+    - nolock
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-backups
+  namespace: dbms
+spec:
+  storageClassName: postgres-backups
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
