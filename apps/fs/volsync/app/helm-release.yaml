@@ -24,7 +24,7 @@ spec:
       retries: 3
   dependsOn:
     - name: snapshot-controller
-      namespace: volsync
+      namespace: fs
   values:
     manageCRDs: true
     image: &image
