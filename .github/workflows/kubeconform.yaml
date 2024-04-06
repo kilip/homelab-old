@@ -5,18 +5,11 @@ name: "Kubeconform"
 on:
   pull_request:
     branches: ["main"]
-    paths: ["apps/**"]
 
 jobs:
   kubeconform:
     name: Kubeconform
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - dir: './apps'
-          - dir: './cluster'
-      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,4 +22,4 @@ jobs:
 
       - name: Run kubeconform
         shell: bash
-        run: bash ./scripts/kubeconform.sh ${{ matrix.dir }}
+        run: bash ./scripts/kubeconform.sh
