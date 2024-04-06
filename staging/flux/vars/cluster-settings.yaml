@@ -5,6 +5,8 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
+  CLUSTER_NAME: olympus
+  DEPLOY: staging
   TIMEZONE: "Asia/Makassar"
   CLUSTER_CIDR: "10.69.0.0/16"
   NODE_CIDR: "10.10.10.0/24"
