@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: db-cloudnative-pg-operator
+  name: cnpg-operator
   namespace: flux-system
 spec:
   path: ./live/apps/db/cloudnative-pg/operator
@@ -15,7 +15,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta2
       kind: HelmRelease
-      name: cloudnative-pg-operator
+      name: cnpg-operator
       namespace: dbms
   prune: true
   wait: true
@@ -27,7 +27,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: db-cloudnative-pg-cluster
+  name: cnpg-cluster
   namespace: flux-system
 spec:
   path: ./live/apps/db/cloudnative-pg/cluster
@@ -35,28 +35,9 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   dependsOn:
-    - name: db-cloudnative-pg-operator
+    - name: cnpg-operator
   prune: true
   wait: true
   interval: 30m
   retryInterval: 2m
   timeout: 5m
----
-# yaml-language-server: $schema=https://kubernetes-schemas.zinn.ca/kustomize.toolkit.fluxcd.io/kustomization_v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: db-cloudnative-pg-backup
-  namespace: flux-system
-spec:
-  path: ./live/apps/db/cloudnative-pg/backup
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
-  dependsOn:
-    - name: db-cloudnative-pg-cluster
-  prune: true
-  wait: true
-  interval: 30m
-  retryInterval: 2m
-  timeout: 1m

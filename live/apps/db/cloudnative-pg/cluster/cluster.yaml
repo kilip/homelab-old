@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.zinn.ca/postgresql.cnpg.io/cluster_v1.json
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -33,14 +34,14 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://postgresql/
-      endpointURL: https://minio-s3.holthome.net
+      endpointURL: minio.fs.svc.cluster.local:9000
       serverName: postgres-v8
       s3Credentials:
         accessKeyId:
-          name: cloudnative-pg-secret
+          name: cnpg-secret
           key: aws-access-key-id
         secretAccessKey:
-          name: cloudnative-pg-secret
+          name: cnpg-secret
           key: aws-secret-access-key
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
@@ -50,11 +51,11 @@ spec:
           compression: bzip2
           maxParallel: 8
         destinationPath: s3://postgresql/
-        endpointURL: https://minio-s3.holthome.net
+        endpointURL: minio.fs.monitoring.svc.cluster.local:9000
         s3Credentials:
           accessKeyId:
-            name: cloudnative-pg-secret
+            name: cnpg-secret
             key: aws-access-key-id
           secretAccessKey:
-            name: cloudnative-pg-secret
+            name: cnpg-secret
             key: aws-secret-access-key
