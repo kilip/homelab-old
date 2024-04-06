@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: &name minio-nfs
+  name: &name minio-pv
 spec:
   storageClassName: *name
   capacity:
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: &name minio-nfs
+  name: &name minio-pvc
 spec:
   accessModes:
     - ReadWriteMany
