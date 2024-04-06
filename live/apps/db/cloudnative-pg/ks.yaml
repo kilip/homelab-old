@@ -55,8 +55,8 @@ spec:
     name: home-kubernetes
   dependsOn:
     - name: db-cloudnative-pg-cluster
-      prune: true
-      wait: true
-      interval: 30m
-      retryInterval: 2m
-      timeout: 1m
+  prune: true
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 1m
