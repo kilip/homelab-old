@@ -16,15 +16,15 @@
   "flux": {
     "fileMatch": [
       "(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$",
-      "(^|/)live/.+\\.ya?ml(?:\\.j2)?$",
-      "(^|/)staging/.+\\.ya?ml(?:\\.j2)?$"
+      "(^|/)apps/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)cluster/.+\\.ya?ml(?:\\.j2)?$"
     ]
   },
   "helm-values": {
     "fileMatch": [
       "(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$",
-      "(^|/)live/.+\\.ya?ml(?:\\.j2)?$",
-      "(^|/)staging/.+\\.ya?ml(?:\\.j2)?$"
+      "(^|/)apps/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)cluster/.+\\.ya?ml(?:\\.j2)?$"
     ]
   },
   "helmfile": {
@@ -35,8 +35,8 @@
   "kubernetes": {
     "fileMatch": [
       "(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$",
-      "(^|/)live/.+\\.ya?ml(?:\\.j2)?$",
-      "(^|/)staging/.+\\.ya?ml(?:\\.j2)?$"
+      "(^|/)apps/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)cluster/.+\\.ya?ml(?:\\.j2)?$"
     ]
   },
   "kustomize": {
@@ -241,9 +241,9 @@
       "fileMatch": [
         "(^|/).taskfiles/.+\\.ya?ml$",
         "(^|/)ansible/.+\\.ya?ml(?:\\.j2)?$",
-        "(^|/)live/.+\\.ya?ml(?:\\.j2)?$",
-        "(^|/)staging/.+\\.ya?ml(?:\\.j2)?$"
-      ],
+        "(^|/)apps/.+\\.ya?ml(?:\\.j2)?$",
+        "(^|/)cluster/.+\\.ya?ml(?:\\.j2)?$"
+        ],
       "matchStrings": [
         // # renovate: datasource=github-releases depName=k3s-io/k3s
         // k3s_release_version: &version v1.29.0+k3s1
