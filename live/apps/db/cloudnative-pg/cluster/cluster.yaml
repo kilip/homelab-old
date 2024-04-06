@@ -13,7 +13,7 @@ spec:
   instances: 2
   primaryUpdateStrategy: unsupervised
   storage:
-    size: 100Gi
+    size: 1Gi
     storageClass: openebs-hostpath
   enableSuperuserAccess: true
   superuserSecret:
