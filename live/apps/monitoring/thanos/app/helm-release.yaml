@@ -61,12 +61,12 @@ spec:
     queryFrontend:
       enabled: true
       replicas: 2
-      extraEnv:
-        - name: THANOS_CACHE_CONFIG
-          valueFrom:
-            configMapKeyRef:
-              name: thanos-cache-configmap
-              key: cache.yaml
+      #extraEnv:
+      #  - name: THANOS_CACHE_CONFIG
+      #    valueFrom:
+      #      configMapKeyRef:
+      #        name: thanos-cache-configmap
+      #        key: cache.yaml
       #extraArgs:
       #  - --query-range.response-cache-config=$(THANOS_CACHE_CONFIG)
       #podAnnotations:
