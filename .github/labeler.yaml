@@ -8,12 +8,12 @@ area/bootstrap:
 area/github:
   - changed-files:
       - any-glob-to-any-file: .github/**/*
-area/live:
+area/apps:
   - changed-files:
-      - any-glob-to-any-file: live/**/*
-area/staging:
+      - any-glob-to-any-file: apps/**/*
+area/cluster:
   - changed-files:
-      - any-glob-to-any-file: staging/**/*
+      - any-glob-to-any-file: cluster/**/*
 area/taskfile:
   - changed-files:
       - any-glob-to-any-file: .taskfiles/**/*

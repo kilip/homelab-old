@@ -5,7 +5,7 @@ name: "Kubeconform"
 on:
   pull_request:
     branches: ["main"]
-    paths: ["live/**", "staging/**"]
+    paths: ["apps/**"]
 
 jobs:
   kubeconform:
@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - dir: './live'
-          - dir: './staging'
+          - dir: './apps'
+          - dir: './cluster'
       fail-fast: false
     steps:
       - name: Checkout

@@ -11,7 +11,7 @@ vars:
   # Directories
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/bootstrap"
-  KUBERNETES_DIR: '{{.ROOT_DIR}}/{{.DEPLOY}}'
+  KUBERNETES_DIR: '{{.ROOT_DIR}}/cluster/{{.DEPLOY}}'
   PRIVATE_DIR: "{{.ROOT_DIR}}/.private"
   SCRIPTS_DIR: "{{.ROOT_DIR}}/scripts"
   # Files

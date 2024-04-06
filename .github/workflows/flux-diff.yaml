@@ -5,7 +5,7 @@ name: "Flux Diff"
 on:
   pull_request:
     branches: ["main"]
-    paths: ["live/**", "staging/**"]
+    paths: ["apps/**", "cluster/**"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -20,7 +20,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        paths: ["live"]
+        paths: ["apps"]
         resources: ["helmrelease", "kustomization"]
     steps:
       - name: Checkout
