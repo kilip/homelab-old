@@ -61,9 +61,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints: &cp
-        - 10.11.0.16
-        - 10.11.0.17
-        - 10.11.0.18
+        - 10.10.10.201
     kubeEtcd:
       enabled: false
     kubelet:
@@ -105,7 +103,7 @@ spec:
         enabled: true
         ingressClassName: internal
         hosts:
-          - "alerts.${SECRET_DOMAIN_NAME}"
+          - "alerts.${SECRET_DOMAIN}"
         path: /
         pathType: Prefix
       config:
@@ -125,9 +123,9 @@ spec:
             - receiver: "discord"
         receivers:
           - name: "null"
-          - name: "discord"
-            webhook_configs:
-              - url: "http://alertmanager-discord:9094"
+          #- name: "discord"
+          #  webhook_configs:
+          #    - url: "http://alertmanager-discord:9094"
         inhibit_rules:
           - source_matchers: ["severity = 'critical'"]
             target_matchers: ["severity = 'warning'"]
@@ -175,7 +173,7 @@ spec:
         enabled: true
         ingressClassName: internal
         hosts:
-          - "prometheus.${SECRET_DOMAIN_NAME}"
+          - "prometheus.${SECRET_DOMAIN}"
         path: /
         pathType: Prefix
       thanosService:
@@ -186,7 +184,7 @@ spec:
         replicas: 1
         replicaExternalLabelName: "__replica__"
         externalLabels:
-          cluster: ${CONFIG_CLUSTER_NAME}
+          cluster: ${CLUSTER_NAME}
         scrapeInterval: 1m
         podAntiAffinity: hard
         ruleSelectorNilUsesHelmValues: false
@@ -216,7 +214,7 @@ spec:
           version: "0.34.1"
           objectStorageConfig:
             existingSecret:
-              name: kube-prometheus-stack-secret
+              name: prometheus-stack-secret
               key: objstore.yml
         additionalScrapeConfigs:
           - job_name: minio-job
@@ -224,44 +222,15 @@ spec:
             scheme: http
             static_configs:
               - targets:
-                  - atlas.${SECRET_TECH_DOMAIN_NAME}:9000
-          - job_name: node-exporter
-            scrape_interval: 1m
-            scrape_timeout: 10s
-            honor_timestamps: true
-            static_configs:
-              - targets:
-                  - "ragnar.${SECRET_TECH_DOMAIN_NAME}:9100"
-                  - "gateway.${SECRET_TECH_DOMAIN_NAME}:9100"
-          - job_name: smartctl-exporter
-            scrape_interval: 1m
-            scrape_timeout: 10s
-            honor_timestamps: true
-            static_configs:
-              - targets:
-                  - "ragnar.${SECRET_TECH_DOMAIN_NAME}:9633"
-          - job_name: speedtest-exporter
-            scrape_interval: 240m
-            scrape_timeout: 120s
-            honor_timestamps: true
-            static_configs:
-              - targets:
-                  - gateway.${SECRET_TECH_DOMAIN_NAME}:9798
-          - job_name: vyos
-            scrape_interval: 1m
-            scrape_timeout: 10s
-            honor_timestamps: true
-            static_configs:
-              - targets:
-                  - gateway.${SECRET_TECH_DOMAIN_NAME}:9273
-          # - job_name: dragonfly
-          #   scrape_interval: 1m
-          #   scrape_timeout: 10s
-          #   honor_timestamps: true
-          #   static_configs:
-          #     - targets:
-          #         - dragonfly.dbms:6379
-
+                  - minio.${SECRET_TLD}:9000
+          #- job_name: node-exporter
+          #  scrape_interval: 1m
+          #  scrape_timeout: 10s
+          #  honor_timestamps: true
+          #  static_configs:
+          #    - targets:
+          #        - "ragnar.${SECRET_TECH_DOMAIN_NAME}:9100"
+          #        - "gateway.${SECRET_TECH_DOMAIN_NAME}:9100"
     grafana:
       enabled: false
       forceDeployDashboards: true
