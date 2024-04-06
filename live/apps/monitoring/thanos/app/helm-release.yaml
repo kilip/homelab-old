@@ -56,7 +56,7 @@ spec:
         size: 10Gi
     query:
       replicas: 2
-      extraArgs: ["--alert.query-url=https://${SECRET_DOMAIN}"]
+      extraArgs: ["--alert.query-url=https://thanos.${SECRET_DOMAIN}"]
     queryFrontend:
       enabled: true
       replicas: 2
@@ -76,7 +76,7 @@ spec:
           alertmanagers:
             - api_version: v2
               static_configs:
-                - dnssrv+_http-web._tcp.alertmanager.monitoring.svc.cluster.local
+                - dnssrv+prometheus-alertmanager.monitoring.svc.cluster.local
       rules:
         value: |-
           groups:
