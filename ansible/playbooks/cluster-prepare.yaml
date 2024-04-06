@@ -52,7 +52,7 @@
             path: /etc/resolv.conf
         - name: Network Configuration | Remove /etc/resolv.conf
           ansible.builtin.file:
-            attributes: -i
+            # attributes: -i
             path: /etc/resolv.conf
             state: absent
         - name: Network Configuration | Add custom /etc/resolv.conf
