@@ -76,7 +76,7 @@ spec:
       enabled: false
     kubeScheduler:
       enabled: true
-      endpoints: *cp
+      #endpoints: *cp
     kubeStateMetrics:
       enabled: true
     kube-state-metrics:
