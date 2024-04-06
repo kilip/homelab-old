@@ -60,6 +60,10 @@ spec:
         prometheusOperator: true
     kubeControllerManager:
       enabled: true
+      endpoints: &cp
+        - 10.96.11.1
+        - 10.96.11.2
+        - 10.96.11.3
     kubeEtcd:
       enabled: false
     kubelet:
@@ -72,11 +76,12 @@ spec:
             targetLabel: instance
     kubeApiServer:
       enabled: true
+      endpoints: *cp
     kubeProxy:
       enabled: false
     kubeScheduler:
       enabled: true
-      #endpoints: *cp
+      endpoints: *cp
     kubeStateMetrics:
       enabled: true
     kube-state-metrics:
