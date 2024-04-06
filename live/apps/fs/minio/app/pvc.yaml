@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: &name minio-nfs
+  name: &name minio-pvc
 spec:
   storageClassName: *name
   capacity:
@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "${NFS_IP}"
-    path: /tank/minio
+    path: ${MINIO_NFS_PATH}
   mountOptions:
     - nfsvers=4
     - nconnect=8
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: &name minio-nfs
+  name: &name minio-pvc
 spec:
   accessModes:
     - ReadWriteMany
