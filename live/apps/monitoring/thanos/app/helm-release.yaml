@@ -57,7 +57,7 @@ spec:
     query:
       replicas: 2
       extraArgs:
-        - "--alert.query-url=http://thanos.${SECRET_DOMAIN}"
+        - "--alert.query-url=http://thanos.staging.itstoni.com"
     queryFrontend:
       enabled: true
       replicas: 2
@@ -75,7 +75,7 @@ spec:
         enabled: true
         ingressClassName: internal
         hosts:
-          - &queryFrontendhost "thanos.${SECRET_DOMAIN}"
+          - &queryFrontendhost "thanos.staging.itstoni.com"
     rule:
       enabled: true
       replicas: 2
