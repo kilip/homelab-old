@@ -230,7 +230,7 @@ spec:
             scheme: http
             static_configs:
               - targets:
-                  - minio.${SECRET_TLD}:9000
+                  - minio.fs.svc.cluster.local:9000
           #- job_name: node-exporter
           #  scrape_interval: 1m
           #  scrape_timeout: 10s
