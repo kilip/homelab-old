@@ -15,6 +15,7 @@ spec:
   storage:
     size: 1Gi
     storageClass: openebs-hostpath
+    resizeInUseVolumes: true
   enableSuperuserAccess: true
   superuserSecret:
     name: postgres-super-user
