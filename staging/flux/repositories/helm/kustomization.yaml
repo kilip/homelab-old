@@ -14,3 +14,4 @@ resources:
   - ./openebs.yaml
   - ./prometheus-community.yaml
   - ./stakater.yaml
+  - ./stevehipwell.yaml
