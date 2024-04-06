@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./apps/apps/fs/nfs-provisioner/app
+  path: ./apps/fs/nfs-provisioner/app
   prune: true
   sourceRef:
     kind: GitRepository

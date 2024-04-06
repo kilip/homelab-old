@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./apps/apps/system/openebs-system/openebs/app
+  path: ./apps/system/openebs-system/openebs/app
   prune: true
   sourceRef:
     kind: GitRepository

@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: &app prometheus-stack
-  path: ./apps/apps/monitoring/prometheus-stack/app
+  path: ./apps/monitoring/prometheus-stack/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

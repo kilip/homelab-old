@@ -12,7 +12,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./apps/apps/fs/minio/app
+  path: ./apps/fs/minio/app
   prune: true
   sourceRef:
     kind: GitRepository

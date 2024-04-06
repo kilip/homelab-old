@@ -6,7 +6,7 @@ metadata:
   name: db-cnpg-operator
   namespace: flux-system
 spec:
-  path: ./apps/apps/db/cloudnative-pg/operator
+  path: ./apps/db/cloudnative-pg/operator
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -30,7 +30,7 @@ metadata:
   name: db-cnpg-cluster
   namespace: flux-system
 spec:
-  path: ./apps/apps/db/cloudnative-pg/cluster
+  path: ./apps/db/cloudnative-pg/cluster
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
