@@ -215,9 +215,15 @@ spec:
           # renovate: depName=quay.io/thanos/thanos datasource=docker
           version: "0.34.1"
           objectStorageConfig:
-            existingSecret:
-              name: prometheus-stack-secret
-              key: objstore.yml
+            secret:
+              type: S3
+              config:
+                insecure: true
+                bucket: "thanos"
+                endpoint: "minio.fs.svc.cluster.local:9000"
+                region: ""
+                access_key: "${S3_ACCESS_KEY}"
+                secret_key: "${S3_SECRET_KEY}"
         additionalScrapeConfigs:
           - job_name: minio-job
             metrics_path: /minio/v2/metrics/cluster
