@@ -76,7 +76,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: openebs-path
+        storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
         size: 1Gi
         advancedMounts:
