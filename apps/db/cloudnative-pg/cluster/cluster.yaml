@@ -34,7 +34,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://postgresql/
-      endpointURL: s3.staging.itstoni.com
+      endpointURL: s3.itstoni.com
       serverName: postgres-v2
       s3Credentials:
         accessKeyId:
@@ -51,7 +51,7 @@ spec:
           compression: bzip2
           maxParallel: 8
         destinationPath: s3://postgresql/
-        endpointURL: s3.staging.itstoni.com
+        endpointURL: s3.itstoni.com
         s3Credentials:
           accessKeyId:
             name: cnpg-secret
