@@ -76,7 +76,9 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: "${VOLSYNC_CLAIM}"
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
         advancedMounts:
           main:
             main:
