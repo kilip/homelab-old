@@ -17,7 +17,7 @@ spec:
     storageClass: openebs-path
   enableSuperuserAccess: true
   superuserSecret:
-    name: postgres-superuser
+    name: postgres-super-user
   postgresql:
     parameters:
       max_connections: "300"
