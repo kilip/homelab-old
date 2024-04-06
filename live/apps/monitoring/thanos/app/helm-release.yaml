@@ -92,6 +92,4 @@ spec:
       persistence: *persistence
     storeGateway:
       replicas: 2
-      extraEnv: *extraEnv
       persistence: *persistence
-      podAnnotations: *podAnnotations
