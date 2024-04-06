@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./cloudnative-pg/ks.yaml
-  - ./pg-admin/ks.yaml
+  - ./pgadmin/ks.yaml
