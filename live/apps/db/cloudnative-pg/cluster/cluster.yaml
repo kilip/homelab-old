@@ -14,7 +14,7 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 100Gi
-    storageClass: openebs-path
+    storageClass: openebs-hostpath
   enableSuperuserAccess: true
   superuserSecret:
     name: postgres-super-user

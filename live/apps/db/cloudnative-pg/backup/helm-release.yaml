@@ -73,6 +73,6 @@ spec:
     persistence:
       backups:
         enabled: true
-        existingClaim: postgres-backups
+        existingClaim: postgres-backup
         globalMounts:
           - path: /backups
