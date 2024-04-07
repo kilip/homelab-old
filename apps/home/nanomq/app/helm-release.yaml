@@ -68,7 +68,7 @@ spec:
                 service:
                   identifier: app
                   port: http
-          - host: &host "mqtt.${SECRET_DOMAIN}"
+          - host: "mqtt.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:

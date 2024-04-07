@@ -21,7 +21,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        paths: ["cluster/live", "cluster/staging"]
+        paths: ["cluster/live"]
         resources: ["helmrelease", "kustomization"]
       fail-fast: false
     steps:
