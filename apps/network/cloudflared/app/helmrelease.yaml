@@ -39,18 +39,8 @@ spec:
               TUNNEL_ORIGIN_ENABLE_HTTP2: true
               TUNNEL_TRANSPORT_PROTOCOL: quic
               TUNNEL_POST_QUANTUM: true
-              TUNNEL_ID:
-                valueFrom:
-                  secretKeyRef:
-                    name: cluster-secrets
-                    namespace: flux-system
-                    key: CF_TUNNEL_ID
-              TUNNEL_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: cluster-secrets
-                    namespace: flux-system
-                    key: CF_TUNNEL_TOKEN
+              TUNNEL_ID: "${CF_TUNNEL_ID}"
+              TUNNEL_TOKEN: "${CF_TUNNEL_TOKEN}"
             args:
               - tunnel
               - --config
