@@ -60,7 +60,8 @@ spec:
         prometheusOperator: true
     kubeControllerManager:
       enabled: true
-      endpoints: &cp ${KUBE_ENDPOINTS}
+      endpoints: &cp
+        - ${K8S_CONTROLLER_1}
     kubeEtcd:
       enabled: false
     kubelet:
