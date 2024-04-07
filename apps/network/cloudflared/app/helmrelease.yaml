@@ -42,13 +42,15 @@ spec:
               TUNNEL_ID:
                 valueFrom:
                   secretKeyRef:
-                    name: cloudflared-secret
-                    key: TUNNEL_ID
+                    name: cluster-secrets
+                    namespace: flux-system
+                    key: CF_TUNNEL_ID
               TUNNEL_TOKEN:
                 valueFrom:
                   secretKeyRef:
-                    name: cloudflared-secret
-                    key: TUNNEL_TOKEN
+                    name: cluster-secrets
+                    namespace: flux-system
+                    key: CF_TUNNEL_TOKEN
             args:
               - tunnel
               - --config
@@ -109,8 +111,9 @@ spec:
             readOnly: true
       creds:
         type: secret
-        name: cloudflared-secret
+        name: cluster-secrets
+        namespace: flux-system
         globalMounts:
           - path: /etc/cloudflared/creds/credentials.json
-            subPath: credentials.json
+            subPath: CF_CREDENTIALS
             readOnly: true
