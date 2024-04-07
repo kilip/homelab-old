@@ -102,7 +102,6 @@ spec:
       creds:
         type: secret
         name: cluster-secrets
-        namespace: flux-system
         globalMounts:
           - path: /etc/cloudflared/creds/credentials.json
             subPath: CF_CREDENTIALS
