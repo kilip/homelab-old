@@ -92,3 +92,6 @@ spec:
           - path: /etc/nanomq_pwd.conf
             subPath: nanomq_pwd.conf
             readOnly: true
+          - path: /etc/nanomq.conf
+            subPath: nanomq.conf
+            readOnly: true
