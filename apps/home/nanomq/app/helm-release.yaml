@@ -78,5 +78,6 @@ spec:
       etc:
         enabled: true
         storageClass: openebs-hostpath
+        size: 1Gi
         globalMounts:
           - path: '/etc'
