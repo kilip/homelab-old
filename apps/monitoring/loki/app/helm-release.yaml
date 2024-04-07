@@ -120,7 +120,7 @@ spec:
         registry: ghcr.io
         repository: nginxinc/nginx-unprivileged
         tag: 1.25.4-alpine@sha256:e5a49a7c7ce0b31af96bf676a3b8e7ef2f6ac1de62c86d9c84bc8083fa402948
-      replicas: 3
+      replicas: 2
       verboseLogging: false
       deploymentStrategy:
         type: RollingUpdate
@@ -143,7 +143,7 @@ spec:
           - hosts:
               - *host
     write:
-      replicas: 3
+      replicas: 2
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -157,7 +157,7 @@ spec:
         size: 20Gi
         storageClass: openebs-hostpath
     read:
-      replicas: 3
+      replicas: 2
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
