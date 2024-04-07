@@ -44,6 +44,10 @@ spec:
                 memory: 128M
               limits:
                 memory: 256M
+        env:
+          NANOMQ_HTTP_SERVER_ENABLE: true
+          NANOMQ_HTTP_SERVER_USERNAME: 'testing'
+          NANOMQ_HTTP_SERVER_PASSWORD: 'testing'
 
     service:
       mqtt:
@@ -57,4 +61,22 @@ spec:
           http:
             port: 8081
 
+    ingress:
+      app:
+        className: "internal"
+        hosts:
+          - host: &host "mqtt.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts: [*host]
+
     persistence:
+      etc:
+        enabled: true
+        storageClass: openebs-hostpath
+        globalMounts:
+          - path: '/etc'
