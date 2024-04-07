@@ -235,9 +235,9 @@ spec:
             honor_timestamps: true
             static_configs:
               - targets:
-                  - "10.0.0.15:9100"
-                  - "10.0.0.13:9100"
-                  - "10.0.0.5:9100"
+                  - "zeus.lan:9100"
+                  - "iris.lan:9100"
+                  - "io.lan:9100"
     grafana:
       enabled: false
       forceDeployDashboards: true
