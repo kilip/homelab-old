@@ -61,8 +61,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints: &cp
-        - 10.96.11.1
-        - 10.96.11.2
+        - 10.10.10.11
     kubeEtcd:
       enabled: false
     kubelet:
