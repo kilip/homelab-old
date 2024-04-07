@@ -50,10 +50,13 @@ spec:
 
     service:
       app:
+        annotations:
+          io.cilium/lb-ipam-ips: ${SVC_MQTT_IP}
         controller: app
         ports:
           mqtt:
             port: 1883
+            protocol: TCP
           http:
             port: 8081
 
@@ -67,12 +70,6 @@ spec:
                 service:
                   identifier: app
                   port: http
-          - host: "mqtt.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: mqtt
         tls:
           - hosts: [*host]
 
