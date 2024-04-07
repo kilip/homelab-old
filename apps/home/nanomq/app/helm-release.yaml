@@ -78,7 +78,7 @@ spec:
           - hosts: [*host]
 
     persistence:
-      etc:
+      config:
         enabled: true
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
