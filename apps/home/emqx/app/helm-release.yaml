@@ -65,10 +65,6 @@ spec:
           - hosts:
             - *host
 
-    persistence:
-      enabled: true
-      storageClass: openebs-hostpath
-
   valuesFrom:
     - targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_PASSWORD
       kind: Secret
