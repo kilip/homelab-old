@@ -50,15 +50,20 @@ spec:
 
     service:
       app:
-        annotations:
-          io.cilium/lb-ipam-ips: ${SVC_MQTT_IP}
         controller: app
         ports:
-          mqtt:
-            port: 1883
-            protocol: TCP
           http:
+            enabled: true
             port: 8081
+      mqtt:
+        controller: app
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: ${SVC_MQTT_IP}
+        ports:
+          mqtt:
+            enabled: true
+            port: 1883
 
     ingress:
       app:
