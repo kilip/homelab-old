@@ -3,11 +3,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app nanomq
+  name: &app emqx
   namespace: flux-system
 spec:
   targetNamespace: home
-  path: ./apps/home/nanomq/app
+  path: ./apps/home/emqx/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

@@ -12,6 +12,7 @@ resources:
   - ./ingress-nginx.yaml
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
+  - ./emqx.yaml
   - ./metrics-server.yaml
   - ./nfs-provisioner.yaml
   - ./openebs.yaml
