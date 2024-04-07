@@ -5,7 +5,7 @@ name: "Flux Diff"
 on:
   workflow_dispatch:
   pull_request:
-    branches: ["main"]
+    branches: ["main", "staging"]
     #paths: ["cluster/**", "apps/**"]
 
 concurrency:
