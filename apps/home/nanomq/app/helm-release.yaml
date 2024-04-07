@@ -77,7 +77,7 @@ spec:
           - hosts: [*host]
 
     persistence:
-      config:
+      etc:
         enabled: true
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
@@ -85,3 +85,10 @@ spec:
         globalMounts:
           - path: '/etc'
             readOnly: false
+      credentials:
+        type: secret
+        name: nanomq-secrets
+        globalMounts:
+          - path: /etc/nanomq_pwd.conf
+            subPath: nanomq_pwd.conf
+            readOnly: true
