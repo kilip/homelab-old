@@ -44,10 +44,10 @@ spec:
                 memory: 128M
               limits:
                 memory: 256M
-          env:
-            NANOMQ_HTTP_SERVER_ENABLE: true
-            NANOMQ_HTTP_SERVER_USERNAME: 'testing'
-            NANOMQ_HTTP_SERVER_PASSWORD: 'testing'
+            env:
+              NANOMQ_HTTP_SERVER_ENABLE: true
+              NANOMQ_HTTP_SERVER_USERNAME: 'testing'
+              NANOMQ_HTTP_SERVER_PASSWORD: 'testing'
 
     service:
       mqtt:
