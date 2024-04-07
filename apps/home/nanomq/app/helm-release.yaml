@@ -50,14 +50,11 @@ spec:
               NANOMQ_HTTP_SERVER_PASSWORD: 'testing'
 
     service:
-      mqtt:
+      app:
         controller: app
         ports:
-          tcp:
+          mqtt:
             port: 1883
-      http:
-        controller: app
-        ports:
           http:
             port: 8081
 
@@ -65,12 +62,18 @@ spec:
       app:
         className: "internal"
         hosts:
-          - host: &host "mqtt.${SECRET_DOMAIN}"
+          - host: &host "nanomq.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+          - host: &host "mqtt.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: mqtt
         tls:
           - hosts: [*host]
 
