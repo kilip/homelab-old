@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.zinn.ca/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -61,9 +61,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints: &cp
-        - 10.96.11.1
-        - 10.96.11.2
-        - 10.96.11.3
+        - 10.10.10.11
     kubeEtcd:
       enabled: false
     kubelet:
