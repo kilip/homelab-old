@@ -3,13 +3,13 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres
+  name: postgres-v16
   namespace: db
   annotations:
     kyverno.io/ignore: "true"
 spec:
   instances: 2
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.5
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.2
   primaryUpdateStrategy: unsupervised
   storage:
     size: 1Gi
@@ -18,7 +18,7 @@ spec:
     name: postgres-secret
   #bootstrap:
   #  recovery:
-  #    source: &previous-cluster postgres-v1
+  #    source: &previous-cluster postgres-v16
   postgresql:
     parameters:
       max_connections: "300"
@@ -34,8 +34,8 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://postgresql/
-      endpointURL: s3.itstoni.com
-      serverName: postgres-v2
+      endpointURL: minio.fs.svc.cluster.local
+      serverName: postgres-v16
       s3Credentials:
         accessKeyId:
           name: cnpg-secret
@@ -45,13 +45,13 @@ spec:
           key: aws-secret-access-key
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
-    - name: postgres-v1
+    - name: postgres-backup
       barmanObjectStore:
         wal:
           compression: bzip2
           maxParallel: 8
         destinationPath: s3://postgresql/
-        endpointURL: s3.itstoni.com
+        endpointURL: http://minio.fs.svc.cluster.local:9000
         s3Credentials:
           accessKeyId:
             name: cnpg-secret
