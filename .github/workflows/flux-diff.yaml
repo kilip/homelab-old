@@ -5,7 +5,7 @@ name: "Flux Diff"
 on:
   workflow_dispatch:
   pull_request:
-    branches: ["main"]
+    branches: ["main", "wip"]
     paths: ["cluster/**", "apps/**"]
 
 concurrency:
@@ -21,8 +21,9 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        paths: ["cluster/live", "cluster/staging", "apps"]
+        paths: ["cluster/live"]
         resources: ["helmrelease", "kustomization"]
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
