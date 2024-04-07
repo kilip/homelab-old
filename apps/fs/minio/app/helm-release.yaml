@@ -110,4 +110,3 @@ spec:
         existingClaim: minio-pvc
         globalMounts:
           - path: /data
-        size: 1Gi

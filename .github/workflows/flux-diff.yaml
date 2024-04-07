@@ -21,8 +21,9 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        paths: ["cluster/live", "cluster/staging", "apps"]
+        paths: ["cluster/live", "cluster/staging"]
         resources: ["helmrelease", "kustomization"]
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
