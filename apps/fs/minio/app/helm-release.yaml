@@ -107,6 +107,6 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: minio-pvc
-        globalMounts:
-          - path: /data
+        type: nfs
+        server: "${NFS_IP}"
+        path: "${MINIO_NFS_PATH}"
