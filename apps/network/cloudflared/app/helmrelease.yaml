@@ -100,9 +100,9 @@ spec:
             subPath: config.yaml
             readOnly: true
       creds:
-        type: secret
-        name: cluster-secrets
+        type: configMap
+        name: cloudflared-credentials
         globalMounts:
           - path: /etc/cloudflared/creds/credentials.json
-            subPath: CF_CREDENTIALS
+            subPath: credentials.json
             readOnly: true
