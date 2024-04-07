@@ -24,7 +24,7 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  timeout: 20m
+  timeout: 5m
   values:
     image:
       repository: emqx/emqx:5.6.0
