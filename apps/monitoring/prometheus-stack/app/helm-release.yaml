@@ -61,7 +61,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints: &cp
-        - 10.10.10.11
+        - ${K8S_CONTROLLER_1}
     kubeEtcd:
       enabled: false
     kubelet:
