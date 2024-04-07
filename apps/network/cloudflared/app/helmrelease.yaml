@@ -39,16 +39,8 @@ spec:
               TUNNEL_ORIGIN_ENABLE_HTTP2: true
               TUNNEL_TRANSPORT_PROTOCOL: quic
               TUNNEL_POST_QUANTUM: true
-              TUNNEL_ID:
-                valueFrom:
-                  secretKeyRef:
-                    name: cloudflared-secret
-                    key: TUNNEL_ID
-              TUNNEL_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: cloudflared-secret
-                    key: TUNNEL_TOKEN
+              TUNNEL_ID: "${CF_TUNNEL_ID}"
+              TUNNEL_TOKEN: "${CF_TUNNEL_TOKEN}"
             args:
               - tunnel
               - --config
@@ -108,8 +100,8 @@ spec:
             subPath: config.yaml
             readOnly: true
       creds:
-        type: secret
-        name: cloudflared-secret
+        type: configMap
+        name: cloudflared-credentials
         globalMounts:
           - path: /etc/cloudflared/creds/credentials.json
             subPath: credentials.json
