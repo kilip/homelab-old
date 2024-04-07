@@ -3,9 +3,10 @@
 name: "Flux Diff"
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: ["main"]
-    paths: ["apps/**", "cluster/**"]
+    paths: ["cluster/**", "apps/**"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -20,7 +21,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        paths: ["apps"]
+        paths: ["cluster/live", "cluster/staging"]
         resources: ["helmrelease", "kustomization"]
     steps:
       - name: Checkout
@@ -40,8 +41,8 @@ jobs:
           args: >-
             diff ${{ matrix.resources }}
             --unified 6
-            --path /github/workspace/pull/${{ matrix.paths }}/flux
-            --path-orig /github/workspace/default/${{ matrix.paths }}/flux
+            --path /github/workspace/pull/${{ matrix.paths }}
+            --path-orig /github/workspace/default/${{ matrix.paths }}
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
