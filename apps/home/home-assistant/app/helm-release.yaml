@@ -71,10 +71,10 @@ spec:
                 memory: 512Mi
         pod:
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 568
+            runAsGroup: 568
             runAsNonRoot: true
-            fsGroup: 1000
+            fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
 
     service:
@@ -107,17 +107,24 @@ spec:
           - hosts: [*host]
 
     persistence:
+      #config:
+      #  storageClass: openebs-hostpath
+      #  size: 1Gi
+      #  accessMode: ReadWriteOnce
+      #  globalMounts:
+      #    - path: /config
       config:
-        storageClass: openebs-hostpath
-        size: 1Gi
-        accessMode: ReadWriteOnce
+        enabled: true
+        type: nfs
+        server: ${NFS_IP}
+        path: /tank/iot/hass
         globalMounts:
           - path: /config
       backup:
         enabled: true
         type: nfs
         server: ${NFS_IP}
-        path: /tank/iot/hass
+        path: /tank/iot/hass-backup
         globalMounts:
           - path: /backup
       deploy-key:
