@@ -110,3 +110,6 @@ spec:
         type: nfs
         server: "${NFS_IP}"
         path: "${MINIO_NFS_PATH}"
+        globalMounts:
+          - path: /data
+
