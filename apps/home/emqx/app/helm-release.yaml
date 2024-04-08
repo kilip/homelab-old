@@ -37,7 +37,8 @@ spec:
       EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_auth_mnesia,emqx_prometheus"
       EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
       EMQX_AUTH__USER__1__USERNAME: broker
-      EMQX_AUTH__USER__2__USERNAME: mqtt
+      EMQX_AUTH__USER__2__USERNAME: iot
+      EMQX_AUTH__USER__3__USERNAME: mqtt
       EMQX_LISTENER__TCP__EXTERNAL_PROXY_PROTOCOL: "on"
 
     emqxAclConfig: >
@@ -71,8 +72,12 @@ spec:
     - targetPath: emqxConfig.EMQX_AUTH__USER__1__PASSWORD
       kind: Secret
       name: emqx-secrets
-      valuesKey: mqtt_password
-    - targetPath: emqxConfig.EMQX_AUTH__USER__1__PASSWORD
+      valuesKey: broker_password
+    - targetPath: emqxConfig.EMQX_AUTH__USER__2__PASSWORD
       kind: Secret
       name: emqx-secrets
-      valuesKey: broker_password
+      valuesKey: iot_password
+    - targetPath: emqxConfig.EMQX_AUTH__USER__3__PASSWORD
+      kind: Secret
+      name: emqx-secrets
+      valuesKey: mqtt_password
