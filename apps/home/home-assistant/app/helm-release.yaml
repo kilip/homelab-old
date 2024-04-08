@@ -51,7 +51,7 @@ spec:
             image:
               repository: ghcr.io/coder/code-server
               tag: 4.22.1
-            dependsOn: hass
+            dependsOn: app
             env:
               TZ: Asia/Makassar
             args:
