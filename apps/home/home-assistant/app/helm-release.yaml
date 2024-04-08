@@ -1,0 +1,146 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: hass
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: volsync
+      namespace: fs
+  values:
+    controllers:
+      hass:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/kilip/home-assistant
+              tag: 2024.4.1
+            envFrom:
+              - secretRef:
+                  name: hass-secrets
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 1Gi
+          code:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.22.1
+            dependsOn: app
+            env:
+              TZ: Asia/Makassar
+            args:
+              - --auth
+              - "none"
+              - --user-data-dir
+              - "/config/.vscode-userdata"
+              - --extensions-dir
+              - "/config/.vscode"
+              - --port
+              - "8081"
+              - "/config"
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+
+    service:
+      app:
+        controller: hass
+        type: LoadBalancer
+        loadBalancerIP: ${SVC_HASS_IP}
+        ports:
+          http:
+            port: 8123
+      code:
+        controller: hass
+        ports:
+          http:
+            port: 8081
+
+    ingress:
+      app:
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        hosts:
+          - host: &host hass-code.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: code
+                  port: http
+        tls:
+          - hosts: [*host]
+
+    persistence:
+      #config:
+      #  storageClass: openebs-hostpath
+      #  size: 1Gi
+      #  accessMode: ReadWriteOnce
+      #  globalMounts:
+      #    - path: /config
+      config:
+        enabled: true
+        type: nfs
+        server: ${NFS_IP}
+        path: /tank/iot/hass
+        globalMounts:
+          - path: /config
+      backup:
+        enabled: true
+        type: nfs
+        server: ${NFS_IP}
+        path: /tank/iot/hass-backup
+        globalMounts:
+          - path: /backup
+      deploy-key:
+        type: secret
+        name: hass-secrets
+        defaultMode: 256
+        globalMounts:
+          - path: /config/.ssh/id_ed25519
+            subPath: DEPLOY_KEY
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+      tts:
+        type: emptyDir
+        globalMounts:
+          - path: /config/tts
+      tmp:
+        type: emptyDir
