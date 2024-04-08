@@ -118,6 +118,13 @@ spec:
         type: nfs
         server: ${NFS_IP}
         path: /tank/iot/hass
+      deploy-key:
+        type: secret
+        name: hass-secrets
+        defaultMode: 256
+        globalMounts:
+          - path: /root/.ssh/id_rsa
+            subPath: DEPLOY_KEY
       logs:
         type: emptyDir
         globalMounts:
