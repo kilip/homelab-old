@@ -38,10 +38,10 @@ spec:
             envFrom:
               - secretRef:
                   name: hass-secrets
-            #securityContext:
-            #  allowPrivilegeEscalation: false
-            #  readOnlyRootFilesystem: true
-            #  #capabilities: { drop: ["ALL"] }
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
