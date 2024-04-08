@@ -27,7 +27,7 @@ spec:
       namespace: fs
   values:
     controllers:
-      hass:
+      app:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -38,12 +38,23 @@ spec:
 
     service:
       app:
-        controller: hass
-        type: LoadBalancer
-        loadBalancerIP: ${SVC_HASS_IP}
+        controller: app
         ports:
           http:
-            port: 8123
+            port: 80
+
+    ingress:
+      app:
+        className: "internal"
+        hosts:
+          - host: &host "tasmota.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts: [*host]
 
     persistence:
       data:
