@@ -58,9 +58,9 @@ spec:
               - --auth
               - "none"
               - --user-data-dir
-              - "/config/.vscode"
+              - "/config/.vscode-userdata"
               - --extensions-dir
-              - "/config/.vscode-extensions"
+              - "/config/.vscode"
               - --port
               - "8081"
               - "/config"
