@@ -60,7 +60,7 @@ spec:
               - --user-data-dir
               - "/config/.vscode"
               - --extensions-dir
-              - "/config/.vscode"
+              - "/config/.vscode-extensions"
               - --port
               - "8081"
               - "/config"
