@@ -118,6 +118,8 @@ spec:
         type: nfs
         server: ${NFS_IP}
         path: /tank/iot/hass
+        globalMounts:
+          - path: /backup
       deploy-key:
         type: secret
         name: hass-secrets
