@@ -1,0 +1,114 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: jellyfin
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      jellyfin:
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 44
+              - 109
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onedr0p/jellyfin
+              tag: 10.8.11
+            resources:
+              requests:
+                cpu: 15m
+                memory: 512Mi
+              limits:
+                memory: 1200Mi
+                #gpu.intel.com/i915: 1
+            probes:
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+        initContainers:
+          init-permission:
+            image:
+              repository: ghcr.io/cbc02009/busybox
+              tag: 1.36.1
+              pullPolicy: IfNotPresent
+            command:
+              - sh
+              - -c
+              - chown -R 568:568 /media
+              - chown -R 568:568 /config/transcodes
+            securityContext:
+              runAsUser: 0
+    service:
+      app:
+        controller: jellyfin
+        ports:
+          http:
+            port: 8096
+    ingress:
+      app:
+        enabled: true
+        className: internal
+        hosts:
+          - host: &host jellyfin.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts: [*host]
+
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: ${NFS_IP}
+        path: '/tank/iot/jellyfin'
+        globalMounts:
+          - path: /config
+      media:
+        enabled: true
+        type: nfs
+        server: ${NFS_IP}
+        path: '/tank/media'
+        globalMounts:
+          - path: /media
+      cache:
+        enabled: true
+        type: emptyDir
+        advancedMounts:
+          jellyfin:
+            main:
+              - path: /config/cache
