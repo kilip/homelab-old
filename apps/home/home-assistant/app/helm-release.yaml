@@ -42,11 +42,11 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
-            #resources:
-              #requests:
-              #  cpu: 10m
-              #limits:
-              #  memory: 1Gi
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 1Gi
           code:
             image:
               repository: ghcr.io/coder/code-server
@@ -64,12 +64,11 @@ spec:
               - --port
               - "8081"
               - "/config"
-            #probes: *probes
-            #resources:
-            #  requests:
-            #    cpu: 10m
-            #  limits:
-            #    memory: 512Mi
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
         pod:
           securityContext:
             runAsUser: 1000
