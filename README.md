@@ -1,6 +1,5 @@
 # Homelab
 
-====
 My Home Operations Repository
 
 ## Overview
