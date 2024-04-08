@@ -36,6 +36,7 @@ spec:
       EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_acl_internal,emqx_mod_topic_metrics"
       EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_auth_mnesia,emqx_prometheus"
       EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
+      EMQX_AUTH__MNESIA__ENABLE: "true"
       EMQX_AUTH__USER__1__USERNAME: broker
       EMQX_AUTH__USER__2__USERNAME: iot
       EMQX_AUTH__USER__3__USERNAME: mqtt
