@@ -93,11 +93,18 @@ spec:
     persistence:
       config:
         enabled: true
-        type: nfs
-        server: ${NFS_IP}
-        path: '/tank/iot/jellyfin'
+        storageClass: openebs-hostpath
+        size: 1Gi
+        accessMode: ReadWriteOnce
         globalMounts:
           - path: /config
+      transcodes:
+        enabled: true
+        storageClass: openebs-hostpath
+        size: 1Gi
+        accessMode: ReadWriteOnce
+        globalMounts:
+          - path: /config/transcodes
       media:
         enabled: true
         type: nfs
