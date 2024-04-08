@@ -96,7 +96,6 @@ spec:
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
         size: 1Gi
-        nameOverride: redis
         globalMounts:
           - path: /data
       healthcheck:

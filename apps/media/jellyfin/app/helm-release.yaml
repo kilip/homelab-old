@@ -96,7 +96,6 @@ spec:
         storageClass: openebs-hostpath
         size: 1Gi
         accessMode: ReadWriteOnce
-        nameOverride: jellyfin-config
         globalMounts:
           - path: /config
       transcodes:
@@ -104,7 +103,6 @@ spec:
         storageClass: openebs-hostpath
         size: 1Gi
         accessMode: ReadWriteOnce
-        nameOverride: jellyfin-transcodes
         globalMounts:
           - path: /config/transcodes
       media:
