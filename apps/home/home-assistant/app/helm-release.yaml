@@ -55,17 +55,15 @@ spec:
             env:
               TZ: Asia/Makassar
             args:
-              [
-                "--auth",
-                "none",
-                "--user-data-dir",
-                "/config/.vscode",
-                "--extensions-dir",
-                "/config/.vscode",
-                "--port",
-                "80",
-                "/config",
-              ]
+              - --auth
+              - "none"
+              - --user-data-dir
+              - "/config/.vscode"
+              - --extensions-dir
+              - "/config/.vscode"
+              - --port
+              - "8081"
+              - "/config"
             #probes: *probes
             resources:
               requests:
@@ -92,7 +90,7 @@ spec:
         controller: hass
         ports:
           http:
-            port: 80
+            port: 8081
 
     ingress:
       app:
