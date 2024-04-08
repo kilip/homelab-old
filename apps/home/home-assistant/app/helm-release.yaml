@@ -111,7 +111,7 @@ spec:
       config:
         storageClass: openebs-hostpath
         size: 1Gi
-        accessMode: ReadWriteMany
+        accessMode: ReadWriteOnce
         globalMounts:
           - path: /config
       backup:
