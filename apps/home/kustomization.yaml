@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./emqx/ks.yaml
   - ./home-assistant/ks.yaml
+  - ./tasmo-admin/ks.yaml
