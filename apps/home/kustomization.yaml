@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./emqx/ks.yaml
+  - ./hass/ks.yaml
