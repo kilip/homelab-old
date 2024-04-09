@@ -8,6 +8,9 @@ metadata:
 spec:
   targetNamespace: home
   path: ./apps/home/home-assistant/app
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

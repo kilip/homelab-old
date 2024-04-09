@@ -20,6 +20,7 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
   dependsOn:
     - name: volsync
@@ -63,14 +64,14 @@ spec:
         enabled: true
         type: nfs
         server: ${NFS_IP}
-        path: /tank/iot/hass
+        path: /tank/iot/${DEPLOY}/hass
         globalMounts:
           - path: /config
       backup:
         enabled: true
         type: nfs
         server: ${NFS_IP}
-        path: /tank/iot/hass-backup
+        path: /tank/iot/${DEPLOY}/hass-backup
         globalMounts:
           - path: /backup
       deploy-key:
