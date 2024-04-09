@@ -215,7 +215,7 @@ spec:
           enabled: true
           ingressClassName: internal
           host:
-            name: &host rgw.ok8.sh
+            name: &host rgw.${SECRET_DOMAIN}
             path: /
           tls:
             - hosts:
