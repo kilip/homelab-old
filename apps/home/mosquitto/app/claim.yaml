@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mosquitto
 spec:
-  accessModes: ReadWriteOnce
+  accessMode: ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
