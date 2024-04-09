@@ -33,8 +33,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/kilip/home-assistant
-              tag: "2024.4.1"
+              repository: ghcr.io/onedr0p/home-assistant
+              tag: 2024.4.2@sha256:871f74f8c6b74027a52803dfe8f7d6df499ba568dd8f8649e8dbd257844e7cf4
             envFrom:
               - secretRef:
                   name: hass-secrets
