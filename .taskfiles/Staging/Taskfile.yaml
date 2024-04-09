@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  DEPLOY: 'staging'
+
+tasks:
+  startvm:
+    desc: Start virtual machines
+    cmds:
+      - vboxmanage startvm k8s-1 --type headless || exit 0
+      - vboxmanage startvm k8s-2 --type headless || exit 0
