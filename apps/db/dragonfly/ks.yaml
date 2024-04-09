@@ -10,8 +10,6 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: external-secrets-stores
   path: ./apps/db/dragonfly/app
   prune: true
   sourceRef:
