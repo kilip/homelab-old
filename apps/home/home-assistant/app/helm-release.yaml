@@ -43,7 +43,7 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources:
               limits:
-                memory: 512MB
+                memory: 512Mi
         pod:
           securityContext:
             runAsUser: 1000
