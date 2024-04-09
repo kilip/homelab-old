@@ -33,3 +33,10 @@ tasks:
   .reset:
     internal: true
     cmd: rm -rf {{.KUBERNETES_DIR}}
+
+  cleanup:
+    desc: Cleanup unworking pods
+    cmds:
+      - kubectl get pod -A | grep Evicted | awk '{print $2 " --namespace=" $1}' | xargs -n 2 kubectl delete pod || true
+      - kubectl delete pods --field-selector="status.phase!=Succeeded,status.phase!=Running"
+      - kubectl delete pods --field-selector="status.phase!=Completed,status.phase!=Running"
