@@ -5,5 +5,5 @@ kind: Kustomization
 namespace: db
 resources:
   - helm-release.yaml
-  - secret.sops.yaml
+  - secrets.sops.yaml
   - service.yaml
