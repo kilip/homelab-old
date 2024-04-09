@@ -5,4 +5,5 @@ resources:
   - ./namespace.yaml
   - ./minio/ks.yaml
   - ./nfs-provisioner/ks.yaml
+  - ./rook-ceph/ks.yaml
   - ./volsync/ks.yaml
