@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./claim.yaml
   - ./secrets.sops.yaml
-  - ./helmr-elease.yaml
+  - ./helm-release.yaml
 configMapGenerator:
   - name: mosquitto-configmap
     files:
