@@ -15,7 +15,7 @@ spec:
     size: 1Gi
     storageClass: openebs-hostpath
   superuserSecret:
-    name: postgres-secret
+    name: cnpg-secrets
   #bootstrap:
   #  recovery:
   #    source: &previous-cluster postgres-v1
@@ -38,10 +38,10 @@ spec:
       serverName: postgres-v2
       s3Credentials:
         accessKeyId:
-          name: cnpg-secret
+          name: cnpg-secrets
           key: aws-access-key-id
         secretAccessKey:
-          name: cnpg-secret
+          name: cnpg-secrets
           key: aws-secret-access-key
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
@@ -54,8 +54,8 @@ spec:
         endpointURL: http://minio.fs.svc.cluster.local:9000
         s3Credentials:
           accessKeyId:
-            name: cnpg-secret
+            name: cnpg-secrets
             key: aws-access-key-id
           secretAccessKey:
-            name: cnpg-secret
+            name: cnpg-secrets
             key: aws-secret-access-key
