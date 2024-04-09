@@ -16,7 +16,10 @@ spec:
     storageClass: openebs-hostpath
   superuserSecret:
     name: cnpg-secrets
-  #bootstrap:
+  bootstrap:
+    initdb:
+      secret:
+        name: cnpg-secrets
   #  recovery:
   #    source: &previous-cluster postgres-v1
   postgresql:
