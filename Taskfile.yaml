@@ -45,6 +45,7 @@ includes:
     taskfile: .taskfiles/User
     optional: true
   volsync: .taskfiles/VolSync/Taskfile.yaml
+  dev: .taskfiles/Staging/Taskfile.yaml
 
 tasks:
 
