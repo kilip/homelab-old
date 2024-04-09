@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/kilip/home-assistant
-              tag: 2024.4.1
+              tag: "2024.4.1"
             envFrom:
               - secretRef:
                   name: hass-secrets
