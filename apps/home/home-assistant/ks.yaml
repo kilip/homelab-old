@@ -13,7 +13,6 @@ spec:
     name: home-kubernetes
   dependsOn:
     - name: openebs
-      namespace: fs
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta2
       kind: HelmRelease
