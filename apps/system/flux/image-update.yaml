@@ -20,5 +20,5 @@ spec:
     push:
       branch: ${DEPLOY}
   update:
-    path: ./cluster/apps
+    path: ./apps
     strategy: Setters
