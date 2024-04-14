@@ -1,0 +1,89 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: purus
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: volsync
+      namespace: fs
+  values:
+    controllers:
+      purus:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/kilip/purus-php
+              tag: latest@sha256:3f53eac3286169cee0f8b0f29122051b8b70b9750e9204b6b140c6e4cfddca63
+            env:
+              APP_ENV: dev
+              PWA_UPSTREAM: pwa:3000
+              SERVER_NAME: &apiServer https://purus-staging.${SECRET_DOMAIN}
+              MERCURE_PUBLIC_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
+              MERCURE_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
+              MERCURE_EXTRA_DIRECTIVES: cors_origins http://purus-staging.${SECRET_DOMAIN} https://purus-staging.${SECRET_DOMAIN}
+            envFrom:
+              - secretRef:
+                  name: purus-secrets
+            resources:
+              limits:
+                memory: 512Mi
+          pwa:
+            image:
+              repository: ghcr.io/kilip/purus-pwa
+              tag: latest@sha256:73de88d5322f51b9f0c6ce2db7251267b6a7ab3eac70258c5407e47b0ee9a3a0
+            env:
+              NEXT_PUBLIC_ENTRYPOINT: *apiServer
+
+    service:
+      app:
+        controller: purus
+        ports:
+          http:
+            port: 80
+          https:
+            port: 443
+
+    ingress:
+      app:
+        className: "external"
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "purus-staging.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts: [*host]
+
+    persistence:
+      caddyfile:
+        type: secret
+        name: purus-secrets
+        defaultMode: 256
+        globalMounts:
+          - path: /etc/caddy/Caddyfile
+            subPath: CADDYFILE
