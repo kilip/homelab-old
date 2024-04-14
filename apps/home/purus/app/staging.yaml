@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/kilip/purus-php
-              tag: main # {"$imagepolicy": "flux-system:purus-php-staging"}
+              tag: main # {"$imagepolicy": "home:purus-php-staging"}
             env:
               APP_ENV: prod
               PWA_UPSTREAM: purus-pwa.home.svc.cluster.local:3000
@@ -51,7 +51,7 @@ spec:
           pwa:
             image:
               repository: ghcr.io/kilip/purus-pwa
-              tag: main # {"$imagepolicy": "flux-system:purus-pwa-staging"}
+              tag: main # {"$imagepolicy": "home:purus-pwa-staging"}
             env:
               NEXT_PUBLIC_ENTRYPOINT: *apiServer
 

@@ -3,7 +3,6 @@ apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
   name: purus-php-staging
-  namespace: flux-system
 spec:
   imageRepositoryRef:
     name: purus-php
@@ -18,7 +17,6 @@ apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
   name: purus-pwa-staging
-  namespace: flux-system
 spec:
   imageRepositoryRef:
     name: purus-pwa
