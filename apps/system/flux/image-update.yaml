@@ -18,7 +18,7 @@ spec:
         name: fluxcdbot
       messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
     push:
-      branch: ${DEPLOY}
+      branch: image-update-${DEPLOY}
   update:
-    path: ./cluster/${DEPLOY}/config
+    path: ./cluster/${DEPLOY}
     strategy: Setters
