@@ -57,7 +57,7 @@ spec:
     name: purus-php
   policy:
     semver:
-      range: 0.1.x
+      range: 0.x
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
@@ -69,7 +69,7 @@ spec:
     name: purus-pwa
   policy:
     semver:
-      range: 0.1.x
+      range: 0.x
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
