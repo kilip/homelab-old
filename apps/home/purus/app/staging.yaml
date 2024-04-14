@@ -34,7 +34,7 @@ spec:
           api:
             image:
               repository: ghcr.io/kilip/purus-php
-              tag: main # {"$imagepolicy": "home:purus-php-staging"}
+              tag: main # {"$imagepolicy": "flux-system:purus-php-staging"}
             env:
               APP_ENV: prod
               PWA_UPSTREAM: purus-staging-pwa.home.svc.cluster.local:3000
