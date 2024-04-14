@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/kilip/purus-php
-              tag: latest@sha256:3f53eac3286169cee0f8b0f29122051b8b70b9750e9204b6b140c6e4cfddca63
+              tag: latest@sha256:1c0cd49f36a0e149f6a058be55afc0c71612971537a5639f3f027567185da2ec
             env:
               APP_ENV: prod
               PWA_UPSTREAM: pwa:3000
