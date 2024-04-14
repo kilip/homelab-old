@@ -1,0 +1,70 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: purus-php
+spec:
+  image: ghcr.io/kilip/purus-php
+  interval: 5m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: purus-pwa
+spec:
+  image: ghcr.io/kilip/purus-pwa
+  interval: 5m
+---
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: purus-php-staging
+spec:
+  imageRepositoryRef:
+    name: purus-php
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: purus-pwa-staging
+spec:
+  imageRepositoryRef:
+    name: purus-pwa
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  git:
+    checkout:
+      ref:
+        branch: ${DEPLOY}
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+    push:
+      branch: image-update-${DEPLOY}
+  update:
+    path: ./cluster/${DEPLOY}
+    strategy: Setters
