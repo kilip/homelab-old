@@ -47,6 +47,36 @@ spec:
     numerical:
       order: asc
 ---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: purus-php
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: purus-php
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: purus-pwa
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: purus-pwa
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc
+---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
 metadata:
