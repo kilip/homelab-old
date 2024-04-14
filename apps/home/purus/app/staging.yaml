@@ -31,13 +31,13 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          api:
             image:
               repository: ghcr.io/kilip/purus-php
               tag: main # {"$imagepolicy": "home:purus-php-staging"}
             env:
               APP_ENV: prod
-              PWA_UPSTREAM: purus-pwa.home.svc.cluster.local:3000
+              PWA_UPSTREAM: purus-staging-pwa.home.svc.cluster.local:3000
               SERVER_NAME: &apiServer http://purus-staging.${SECRET_DOMAIN}
               MERCURE_PUBLIC_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
               MERCURE_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
@@ -56,7 +56,7 @@ spec:
               NEXT_PUBLIC_ENTRYPOINT: *apiServer
 
     service:
-      app:
+      api:
         controller: purus
         ports:
           http:
@@ -70,7 +70,7 @@ spec:
             port: 3000
 
     ingress:
-      app:
+      api:
         className: "external"
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
@@ -79,7 +79,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: api
                   port: http
         tls:
           - hosts: [*host]
