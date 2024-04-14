@@ -51,7 +51,7 @@ spec:
           pwa:
             image:
               repository: ghcr.io/kilip/purus-pwa
-              tag: main # {"$imagepolicy": "home:purus-pwa-staging"}
+              tag: main # {"$imagepolicy": "flux-system:purus-pwa-staging"}
             env:
               NEXT_PUBLIC_ENTRYPOINT: *apiServer
 
