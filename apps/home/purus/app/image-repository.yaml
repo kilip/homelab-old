@@ -1,0 +1,18 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: purus-php
+  namespace: flux-system
+spec:
+  image: ghcr.io/kilip/purus-php
+  interval: 5m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: purus-pwa
+  namespace: flux-system
+spec:
+  image: ghcr.io/kilip/purus-pwa
+  interval: 5m

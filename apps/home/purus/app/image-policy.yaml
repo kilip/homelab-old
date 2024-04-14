@@ -1,0 +1,28 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: purus-php-staging
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: purus-php
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: purus-pwa-staging
+  namespace: flux-system
+spec:
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc

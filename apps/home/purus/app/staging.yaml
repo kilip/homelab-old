@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: purus
+  name: purus-staging
 spec:
   interval: 30m
   chart:
@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/kilip/purus-php
-              tag: latest@sha256:1c0cd49f36a0e149f6a058be55afc0c71612971537a5639f3f027567185da2ec
+              tag: main # {"$imagepolicy": "flux-system:purus-php-staging"}
             env:
               APP_ENV: prod
               PWA_UPSTREAM: purus-pwa.home.svc.cluster.local:3000
@@ -44,14 +44,14 @@ spec:
               MERCURE_EXTRA_DIRECTIVES: cors_origins http://purus-staging.${SECRET_DOMAIN} https://purus-staging.${SECRET_DOMAIN}
             envFrom:
               - secretRef:
-                  name: purus-secrets
+                  name: purus-staging-secrets
             resources:
               limits:
                 memory: 512Mi
           pwa:
             image:
               repository: ghcr.io/kilip/purus-pwa
-              tag: latest@sha256:73de88d5322f51b9f0c6ce2db7251267b6a7ab3eac70258c5407e47b0ee9a3a0
+              tag: main # {"$imagepolicy": "flux-system:purus-pwa-staging"}
             env:
               NEXT_PUBLIC_ENTRYPOINT: *apiServer
 
@@ -87,7 +87,7 @@ spec:
     persistence:
       caddyfile:
         type: secret
-        name: purus-secrets
+        name: purus-staging-secrets
         defaultMode: 256
         globalMounts:
           - path: /etc/caddy/Caddyfile
