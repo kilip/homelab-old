@@ -36,7 +36,7 @@ spec:
               repository: ghcr.io/kilip/purus-php
               tag: latest@sha256:3f53eac3286169cee0f8b0f29122051b8b70b9750e9204b6b140c6e4cfddca63
             env:
-              APP_ENV: dev
+              APP_ENV: prod
               PWA_UPSTREAM: pwa:3000
               SERVER_NAME: &apiServer https://purus-staging.${SECRET_DOMAIN}
               MERCURE_PUBLIC_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
