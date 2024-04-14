@@ -37,7 +37,7 @@ spec:
               tag: latest@sha256:1c0cd49f36a0e149f6a058be55afc0c71612971537a5639f3f027567185da2ec
             env:
               APP_ENV: prod
-              PWA_UPSTREAM: pwa.home.svc.cluster.local:3000
+              PWA_UPSTREAM: purus-pwa.home.svc.cluster.local:3000
               SERVER_NAME: &apiServer http://purus-staging.${SECRET_DOMAIN}
               MERCURE_PUBLIC_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
               MERCURE_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
