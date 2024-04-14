@@ -20,6 +20,8 @@ metadata:
   name: purus-pwa-staging
   namespace: flux-system
 spec:
+  imageRepositoryRef:
+    name: purus-pwa
   filterTags:
     pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
     extract: '$ts'
