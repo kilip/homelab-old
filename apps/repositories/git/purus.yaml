@@ -89,7 +89,7 @@ spec:
       author:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
-      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+      messageTemplate: 'feat: upgraded image {{range .Updated.Images}}{{println .}}{{end}}'
     push:
       branch: ${DEPLOY}
   update:
