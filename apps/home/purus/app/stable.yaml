@@ -36,11 +36,11 @@ spec:
               tag: main-057b0095687cbd1be93ea67c4490300413897886-20240414175506 # {"$imagepolicy": "flux-system:purus-php:tag"}
             env:
               APP_ENV: prod
-              PWA_UPSTREAM: purus-staging-pwa.home.svc.cluster.local:3000
-              SERVER_NAME: &apiServer http://purus-staging.${SECRET_DOMAIN}
-              MERCURE_PUBLIC_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
-              MERCURE_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
-              MERCURE_EXTRA_DIRECTIVES: cors_origins http://purus-staging.${SECRET_DOMAIN} https://purus-staging.${SECRET_DOMAIN}
+              PWA_UPSTREAM: purus-pwa.home.svc.cluster.local:3000
+              SERVER_NAME: &apiServer http://purus.${SECRET_DOMAIN}
+              MERCURE_PUBLIC_URL: https://purus.${SECRET_DOMAIN}/.well-known/mercure
+              MERCURE_URL: https://purus.${SECRET_DOMAIN}/.well-known/mercure
+              MERCURE_EXTRA_DIRECTIVES: cors_origins http://purus.${SECRET_DOMAIN} https://purus.${SECRET_DOMAIN}
             envFrom:
               - secretRef:
                   name: purus-secrets
