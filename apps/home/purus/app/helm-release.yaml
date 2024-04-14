@@ -38,7 +38,7 @@ spec:
             env:
               APP_ENV: prod
               PWA_UPSTREAM: pwa:3000
-              SERVER_NAME: &apiServer https://purus-staging.${SECRET_DOMAIN}
+              SERVER_NAME: &apiServer http://purus-staging.${SECRET_DOMAIN}
               MERCURE_PUBLIC_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
               MERCURE_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
               MERCURE_EXTRA_DIRECTIVES: cors_origins http://purus-staging.${SECRET_DOMAIN} https://purus-staging.${SECRET_DOMAIN}
