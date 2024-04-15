@@ -101,26 +101,6 @@ spec:
                   command:
                     - "/app/bin/console"
                     - "stop-workers"
-            #probes:
-            #  readiness:
-            #    enabled: true
-            #    custom: true
-            #    spec:
-            #      initialDelaySeconds: 120
-            #      periodSeconds: 3
-            #      exec:
-            #          command: ["/bin/sh", "-c", "/bin/ps -ef | grep messenger:consume | grep -v grep"]
-            #  startup:
-            #    enabled: true
-            #    custom: true
-            #    spec:
-            #      exec:
-            #        command: ["/bin/sh", "-c", "/bin/ps -ef | grep messenger:consume | grep -v grep"]
-            #      failureThreshold: 40
-            #      periodSeconds: 3
-
-
-
 
     service:
       api:
