@@ -24,14 +24,22 @@ spec:
         - secretRef:
             name: *secret
       env:
-        AUTHENTIK_STORAGE__MEDIA__BACKEND: "s3"
-        AUTHENTIK_STORAGE__MEDIA__S3__ACCESS_KEY: "${S3_ACCESS_KEY}"
-        AUTHENTIK_STORAGE__MEDIA__S3__SECRET_KEY: "${S3_SECRET_KEY}"
-        AUTHENTIK_STORAGE__MEDIA__S3__BUCKET_NAME: "authentik"
-        AUTHENTIK_STORAGE__MEDIA__S3__ENDPOINT: "minio.fs.svc.cluster.local"
-        AUTHENTIK_STORAGE__MEDIA__S3__CUSTOM_DOMAIN: "minio.fs.svc.cluster.local"
-        INIT_POSTGRES_SUPER_USER: ${PG_SUPER_USER}
-        INIT_POSTGRES_SUPER_PASS: ${PG_SUPER_PASS}
+        - name: AUTHENTIK_STORAGE__MEDIA__BACKEND:
+          value: "s3"
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__ACCESS_KEY
+          value: "${S3_ACCESS_KEY}"
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__SECRET_KEY
+          value: "${S3_SECRET_KEY}"
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__BUCKET_NAME
+          value: "authentik"
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__ENDPOINT
+          value: "minio.fs.svc.cluster.local"
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__CUSTOM_DOMAIN
+          value: "minio.fs.svc.cluster.local"
+        - name: INIT_POSTGRES_SUPER_USER
+          value: ${PG_SUPER_USER}
+        - name: INIT_POSTGRES_SUPER_PASS
+          value: ${PG_SUPER_PASS}
     authentik:
       redis:
         host: dragonfly.db.svc.cluster.local
