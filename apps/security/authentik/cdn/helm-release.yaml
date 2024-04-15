@@ -45,6 +45,7 @@ spec:
               S3CDN__ACCESS_KEY_ID: ${S3_ACCESS_KEY}
               S3CDN__SECRET_ACCESS_KEY: ${S3_SECRET_KEY}
               S3CDN__BUCKET: "authentik-cdn"
+              S3CDN__REGION: "us-east-1"
     service:
       main:
         controller: main
