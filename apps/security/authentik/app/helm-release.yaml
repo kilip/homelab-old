@@ -1,0 +1,61 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: authentik
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: authentik
+      version: 2024.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+      interval: 5m
+  values:
+    global:
+      podAnnotations:
+        secret.reloader.stakater.com/reload: &secret authentik-secret
+      deploymentStrategy:
+        type: RollingUpdate
+      envFrom:
+        - secretRef:
+            name: *secret
+      env:
+        AUTHENTIK_STORAGE__MEDIA__BACKEND: "s3"
+        AUTHENTIK_STORAGE__MEDIA__S3__ACCESS_KEY: "${S3_ACCESS_KEY}"
+        AUTHENTIK_STORAGE__MEDIA__S3__SECRET_KEY: "${S3_SECRET_KEY}"
+        AUTHENTIK_STORAGE__MEDIA__S3__BUCKET_NAME: "authentik"
+        AUTHENTIK_STORAGE__MEDIA__S3__ENDPOINT: "minio.fs.svc.cluster.local"
+        AUTHENTIK_STORAGE__MEDIA__S3__CUSTOM_DOMAIN: "minio.fs.svc.cluster.local"
+        INIT_POSTGRES_SUPER_USER: ${PG_SUPER_USER}
+        INIT_POSTGRES_SUPER_PASS: ${PG_SUPER_PASS}
+    authentik:
+      redis:
+        host: dragonfly.db.svc.cluster.local
+        db: 1
+    server:
+      initContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:16.2@sha256:3436dfbbc2799332a01361e007e3b408d016cfc235261e1caccc65e6edadf516
+          envFrom:
+            - secretRef:
+                name: *secret
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: external
+        annotations:
+          external-dns/is-public: "true"
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        hosts:
+          - sso.${SECRET_DOMAIN}
+        https: false
+    prometheus:
+      rules:
+        enabled: true
