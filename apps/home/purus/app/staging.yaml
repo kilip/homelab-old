@@ -33,7 +33,7 @@ spec:
           api:
             image: &phpImage
               repository: ghcr.io/kilip/purus-php # {"$imagepolicy": "flux-system:purus-php-staging:name"}
-              tag: main-a01f1d6b41c53a12bc25cb352fb9c4368077e9ba-20240415023802 # {"$imagepolicy": "flux-system:purus-php-staging:tag"}
+              tag: main-3c37d79a303692850da8e3912499ce471bfe9226-20240415163022 # {"$imagepolicy": "flux-system:purus-php-staging:tag"}
             env: &phpEnv
               APP_ENV: prod
               PWA_UPSTREAM: purus-staging-pwa.home.svc.cluster.local:3000
@@ -62,11 +62,10 @@ spec:
                 spec:
                   initialDelaySeconds: 10
                   periodSeconds: 10
-
           pwa:
             image:
               repository: ghcr.io/kilip/purus-pwa # {"$imagepolicy": "flux-system:purus-pwa-staging:name"}
-              tag: main-a01f1d6b41c53a12bc25cb352fb9c4368077e9ba-20240415023802 # {"$imagepolicy": "flux-system:purus-pwa-staging:tag"}
+              tag: main-3c37d79a303692850da8e3912499ce471bfe9226-20240415163022 # {"$imagepolicy": "flux-system:purus-pwa-staging:tag"}
             env:
               NEXT_PUBLIC_ENTRYPOINT: *apiServer
             probes:
@@ -84,7 +83,6 @@ spec:
                 spec:
                   initialDelaySeconds: 10
                   periodSeconds: 10
-
           messenger:
             image: *phpImage
             env: *phpEnv
@@ -100,7 +98,6 @@ spec:
                   command:
                     - "/app/bin/console"
                     - "stop-workers"
-
     service:
       api:
         controller: purus
