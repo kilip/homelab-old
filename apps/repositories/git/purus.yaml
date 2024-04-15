@@ -84,14 +84,14 @@ spec:
   git:
     checkout:
       ref:
-        branch: ${DEPLOY}
+        branch: ${GIT_BRANCH}
     commit:
       author:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
       messageTemplate: 'feat: upgraded image {{range .Updated.Images}}{{println .}}{{end}}'
     push:
-      branch: ${DEPLOY}
+      branch: ${GIT_BRANCH}
   update:
     path: ./apps
     strategy: Setters
