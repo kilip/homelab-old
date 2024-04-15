@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: purus-staging
+  name: &purus-staging
 spec:
   interval: 30m
   chart:
@@ -31,28 +31,97 @@ spec:
           reloader.stakater.com/auto: "true"
         containers:
           api:
-            image:
+            image: &phpImage
               repository: ghcr.io/kilip/purus-php # {"$imagepolicy": "flux-system:purus-php-staging:name"}
               tag: main-a01f1d6b41c53a12bc25cb352fb9c4368077e9ba-20240415023802 # {"$imagepolicy": "flux-system:purus-php-staging:tag"}
-            env:
+            env: &phpEnv
               APP_ENV: prod
               PWA_UPSTREAM: purus-staging-pwa.home.svc.cluster.local:3000
               SERVER_NAME: &apiServer http://purus-staging.${SECRET_DOMAIN}
               MERCURE_PUBLIC_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
               MERCURE_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
               MERCURE_EXTRA_DIRECTIVES: cors_origins http://purus-staging.${SECRET_DOMAIN} https://purus-staging.${SECRET_DOMAIN}
-            envFrom:
+            envFrom: &phpEnvFrom
               - secretRef:
                   name: purus-staging-secrets
             resources:
               limits:
                 memory: 512Mi
+            probes:
+              readiness:
+                enabled: true
+                type: 'TCP'
+                port: 80
+                spec:
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+              liveness:
+                enabled: true
+                type: 'TCP'
+                port: 80
+                spec:
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+
+
           pwa:
             image:
               repository: ghcr.io/kilip/purus-pwa # {"$imagepolicy": "flux-system:purus-pwa-staging:name"}
               tag: main-a01f1d6b41c53a12bc25cb352fb9c4368077e9ba-20240415023802 # {"$imagepolicy": "flux-system:purus-pwa-staging:tag"}
             env:
               NEXT_PUBLIC_ENTRYPOINT: *apiServer
+            probes:
+              readiness:
+                enabled: true
+                type: 'TCP'
+                port: 3000
+                spec:
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+              liveness:
+                enabled: true
+                type: 'TCP'
+                port: 3000
+                spec:
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+
+          messenger:
+            image: *phpImage
+            env: *phpEnv
+            envFrom: *phpEnvFrom
+            command: '/app/bin/console'
+            args:
+              - messenger:consume
+              - -vvv
+              - --memory-limit=100M
+            lifecycle:
+              preStop:
+                exec:
+                  command:
+                    - "/app/bin/console"
+                    - "stop-workers"
+            #probes:
+            #  readiness:
+            #    enabled: true
+            #    custom: true
+            #    spec:
+            #      initialDelaySeconds: 120
+            #      periodSeconds: 3
+            #      exec:
+            #          command: ["/bin/sh", "-c", "/bin/ps -ef | grep messenger:consume | grep -v grep"]
+            #  startup:
+            #    enabled: true
+            #    custom: true
+            #    spec:
+            #      exec:
+            #        command: ["/bin/sh", "-c", "/bin/ps -ef | grep messenger:consume | grep -v grep"]
+            #      failureThreshold: 40
+            #      periodSeconds: 3
+
+
+
+
     service:
       api:
         controller: purus
