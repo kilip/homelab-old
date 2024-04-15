@@ -41,7 +41,7 @@ spec:
               - server
             env:
               RUST_LOG: trace
-              S3CDN__HOST: minio.db.svc.cluster.local
+              S3CDN__HOST: minio.fs.svc.cluster.local:9000
               S3CDN__ACCESS_KEY_ID: ${S3_ACCESS_KEY}
               S3CDN__SECRET_ACCESS_KEY: ${S3_SECRET_KEY}
               S3CDN__BUCKET: "authentik-cdn"
