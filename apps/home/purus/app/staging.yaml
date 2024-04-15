@@ -33,7 +33,7 @@ spec:
           api:
             image:
               repository: ghcr.io/kilip/purus-php # {"$imagepolicy": "flux-system:purus-php-staging:name"}
-              tag: main-057b0095687cbd1be93ea67c4490300413897886-20240414175506 # {"$imagepolicy": "flux-system:purus-php-staging:tag"}
+              tag: main-a01f1d6b41c53a12bc25cb352fb9c4368077e9ba-20240415023802 # {"$imagepolicy": "flux-system:purus-php-staging:tag"}
             env:
               APP_ENV: prod
               PWA_UPSTREAM: purus-staging-pwa.home.svc.cluster.local:3000
@@ -50,7 +50,7 @@ spec:
           pwa:
             image:
               repository: ghcr.io/kilip/purus-pwa # {"$imagepolicy": "flux-system:purus-pwa-staging:name"}
-              tag: main-057b0095687cbd1be93ea67c4490300413897886-20240414175506 # {"$imagepolicy": "flux-system:purus-pwa-staging:tag"}
+              tag: main-a01f1d6b41c53a12bc25cb352fb9c4368077e9ba-20240415023802 # {"$imagepolicy": "flux-system:purus-pwa-staging:tag"}
             env:
               NEXT_PUBLIC_ENTRYPOINT: *apiServer
     service:
