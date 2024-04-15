@@ -37,7 +37,7 @@ spec:
             env: &phpEnv
               APP_ENV: prod
               PWA_UPSTREAM: purus-staging-pwa.home.svc.cluster.local:3000
-              SERVER_NAME: &apiServer http://purus-staging.${SECRET_DOMAIN}
+              SERVER_NAME: &apiServer https://purus-staging.${SECRET_DOMAIN}
               MERCURE_PUBLIC_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
               MERCURE_URL: https://purus-staging.${SECRET_DOMAIN}/.well-known/mercure
               MERCURE_EXTRA_DIRECTIVES: cors_origins http://purus-staging.${SECRET_DOMAIN} https://purus-staging.${SECRET_DOMAIN}
@@ -62,7 +62,6 @@ spec:
                 spec:
                   initialDelaySeconds: 10
                   periodSeconds: 10
-
 
           pwa:
             image:
