@@ -17,14 +17,14 @@ spec:
   values:
     global:
       podAnnotations:
-        secret.reloader.stakater.com/reload: &secret authentik-secret
+        secret.reloader.stakater.com/reload: &secret authentik-secrets
       deploymentStrategy:
         type: RollingUpdate
       envFrom:
         - secretRef:
             name: *secret
       env:
-        - name: AUTHENTIK_STORAGE__MEDIA__BACKEND:
+        - name: AUTHENTIK_STORAGE__MEDIA__BACKEND
           value: "s3"
         - name: AUTHENTIK_STORAGE__MEDIA__S3__ACCESS_KEY
           value: "${S3_ACCESS_KEY}"
