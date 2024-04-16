@@ -50,8 +50,8 @@ spec:
       passwordKey: adminPassword
     env:
       GF_SECURITY_ANGULAR_SUPPORT_ENABLED: true
-      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
       GF_AUTH_GENERIC_OAUTH_CLIENT_ID: ${SSO_CLIENT_ID}
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
     envFromSecrets:
       - name: grafana-secret
     grafana.ini:
