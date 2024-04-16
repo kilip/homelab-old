@@ -264,12 +264,15 @@ spec:
         cilium-dashboard:
           url: https://raw.githubusercontent.com/cilium/cilium/v1.15.3/install/kubernetes/cilium/files/cilium-agent/dashboards/cilium-dashboard.json
           datasource: Prometheus
+          org_id: 1
         cilium-operator-dashboard:
           url: https://raw.githubusercontent.com/cilium/cilium/v1.15.3/install/kubernetes/cilium/files/cilium-operator/dashboards/cilium-operator-dashboard.json
           datasource: Prometheus
+          org_id: 1
         hubble-dashboard:
           url: https://raw.githubusercontent.com/cilium/cilium/v1.15.3/install/kubernetes/cilium/files/hubble/dashboards/hubble-dashboard.json
           datasource: Prometheus
+          org_id: 1
       data:
         cloudnative-pg:
           url: https://raw.githubusercontent.com/cloudnative-pg/grafana-dashboards/main/charts/cluster/grafana-dashboard.json
