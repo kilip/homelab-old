@@ -49,13 +49,9 @@ spec:
       userKey: adminUser
       passwordKey: adminPassword
     env:
-      # Authelia
-      # GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${SECRET_DOMAIN_NAME}/api/oidc/userinfo
-      # GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${SECRET_DOMAIN_NAME}/api/oidc/authorization
-      # GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${SECRET_DOMAIN_NAME}/api/oidc/token
-
-      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
       GF_SECURITY_ANGULAR_SUPPORT_ENABLED: true
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: ${SSO_CLIENT_ID}
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
     envFromSecrets:
       - name: grafana-secret
     grafana.ini:
@@ -68,31 +64,12 @@ spec:
         oauth_auto_login: true
       auth.generic_oauth:
         name: authentik
-        enabled: false
+        enabled: true
         scopes: "openid profile email"
         auth_url: "https://sso.${SECRET_DOMAIN}/application/o/authorize/"
         token_url: "https://sso.${SECRET_DOMAIN}/application/o/token/"
         api_url: "https://sso.${SECRET_DOMAIN}/application/o/userinfo/"
         role_attribute_path: contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'
-      # Authelia
-      # auth:
-      #   oauth_auto_login: true
-      #   oauth_allow_insecure_email_lookup: true
-      # auth.generic_oauth:
-      #   enabled: true
-      #   name: Authelia
-      #   icon: signin
-      #   client_id: grafana
-      #   scopes: "openid profile email groups"
-      #   empty_scopes: false
-      #   login_attribute_path: preferred_username
-      #   groups_attribute_path: groups
-      #   name_attribute_path: name
-      #   use_pkce: true
-      # auth.generic_oauth.group_mapping:
-      #   role_attribute_path: |
-      #     contains(groups[*], 'admins') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
-      #   org_id: 1
       auth.basic:
         enabled: true
       auth.anonymous:
@@ -287,16 +264,19 @@ spec:
         cilium-dashboard:
           url: https://raw.githubusercontent.com/cilium/cilium/v1.15.3/install/kubernetes/cilium/files/cilium-agent/dashboards/cilium-dashboard.json
           datasource: Prometheus
+          org_id: 1
         cilium-operator-dashboard:
           url: https://raw.githubusercontent.com/cilium/cilium/v1.15.3/install/kubernetes/cilium/files/cilium-operator/dashboards/cilium-operator-dashboard.json
           datasource: Prometheus
+          org_id: 1
         hubble-dashboard:
           url: https://raw.githubusercontent.com/cilium/cilium/v1.15.3/install/kubernetes/cilium/files/hubble/dashboards/hubble-dashboard.json
           datasource: Prometheus
+          org_id: 1
       data:
-        #cloudnative-pg:
-        #  url: https://raw.githubusercontent.com/cloudnative-pg/grafana-dashboards/main/charts/cluster/grafana-dashboard.json
-        #  datasource: Prometheus
+        cloudnative-pg:
+          url: https://raw.githubusercontent.com/cloudnative-pg/grafana-dashboards/main/charts/cluster/grafana-dashboard.json
+          datasource: Prometheus
         dragonfly:
           url: https://raw.githubusercontent.com/dragonflydb/dragonfly/main/tools/local/monitoring/grafana/provisioning/dashboards/dashboard.json
           datasource: Prometheus
