@@ -71,7 +71,7 @@ spec:
         api_url: "https://sso.itstoni.com/application/o/userinfo/"
         role_attribute_path: contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'
       auth.basic:
-        enabled: false
+        enabled: true
       auth.anonymous:
         enabled: true
         org_id: 1
