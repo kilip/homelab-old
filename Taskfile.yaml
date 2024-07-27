@@ -11,7 +11,7 @@ vars:
   # Directories
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/bootstrap"
-  KUBERNETES_DIR: '{{.ROOT_DIR}}/cluster/{{.DEPLOY}}'
+  KUBERNETES_DIR: "{{.ROOT_DIR}}/cluster/{{.DEPLOY}}"
   PRIVATE_DIR: "{{.ROOT_DIR}}/.private"
   SCRIPTS_DIR: "{{.ROOT_DIR}}/scripts"
   # Files
@@ -30,25 +30,24 @@ env:
   VIRTUAL_ENV: "{{.ROOT_DIR}}/.venv"
 
 includes:
-  ansible: .taskfiles/Ansible/Taskfile.yaml
-  kubernetes:
+  an: .taskfiles/Ansible/Taskfile.yaml
+  kb:
     aliases: ["k8s"]
     taskfile: .taskfiles/Kubernetes/Taskfile.yaml
-  flux: .taskfiles/Flux/Taskfile.yaml
-  repository:
+  fl: .taskfiles/Flux/Taskfile.yaml
+  rp:
     aliases: ["repo"]
     taskfile: .taskfiles/Repository/Taskfile.yaml
-  talos: .taskfiles/Talos/Taskfile.yaml
+  tl: .taskfiles/Talos/Taskfile.yaml
   sops: .taskfiles/Sops/Taskfile.yaml
-  workstation: .taskfiles/Workstation/Taskfile.yaml
+  ws: .taskfiles/Workstation/Taskfile.yaml
   user:
     taskfile: .taskfiles/User
     optional: true
-  volsync: .taskfiles/VolSync/Taskfile.yaml
+  vs: .taskfiles/VolSync/Taskfile.yaml
   dev: .taskfiles/Staging/Taskfile.yaml
 
 tasks:
-
   default: task -l
 
   test:
@@ -83,9 +82,18 @@ tasks:
     cmd: "{{.VIRTUAL_ENV}}/bin/makejinja"
     preconditions:
       - { msg: "Missing virtual environment", sh: "test -d {{.VIRTUAL_ENV}}" }
-      - { msg: "Missing Makejinja config file", sh: "test -f {{.MAKEJINJA_CONFIG_FILE}}" }
-      - { msg: "Missing Makejinja plugin file", sh: "test -f {{.BOOTSTRAP_DIR}}/scripts/plugin.py" }
-      - { msg: "Missing bootstrap config file", sh: "test -f {{.BOOTSTRAP_CONFIG_FILE}}" }
+      - {
+          msg: "Missing Makejinja config file",
+          sh: "test -f {{.MAKEJINJA_CONFIG_FILE}}",
+        }
+      - {
+          msg: "Missing Makejinja plugin file",
+          sh: "test -f {{.BOOTSTRAP_DIR}}/scripts/plugin.py",
+        }
+      - {
+          msg: "Missing bootstrap config file",
+          sh: "test -f {{.BOOTSTRAP_CONFIG_FILE}}",
+        }
 
   .validate:
     internal: true
