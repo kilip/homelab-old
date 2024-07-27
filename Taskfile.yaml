@@ -7,7 +7,6 @@ dotenv:
   - ".env.local"
 
 vars:
-  DEPLOY: '{{or .DEPLOY "live"}}'
   # Directories
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/bootstrap"
@@ -104,3 +103,10 @@ tasks:
     desc: Extract sensitive information from pass
     cmds:
       - pass age/keys > ./age.key
+
+  prepare:
+    desc: Prepare kubernetes nodes
+    cmds:
+      - task: an:run
+        vars:
+          playbook: cluster-prepare

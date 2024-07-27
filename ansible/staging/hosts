@@ -1,0 +1,12 @@
+k8s-1 ansible_host=10.10.10.11
+k8s-2 ansible_host=10.10.10.12
+
+[controllers]
+k8s-1
+
+[workers]
+k8s-2
+
+[kubernetes]
+k8s-1
+k8s-2

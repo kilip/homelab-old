@@ -6,7 +6,6 @@ vars:
   KUBECONFORM_SCRIPT: "{{.SCRIPTS_DIR}}/kubeconform.sh"
 
 tasks:
-
   resources:
     desc: Gather common resources in your cluster, useful when asking for support
     cmds:
@@ -28,7 +27,10 @@ tasks:
     desc: Validate Kubernetes manifests with kubeconform
     cmd: bash {{.KUBECONFORM_SCRIPT}} {{.KUBERNETES_DIR}}
     preconditions:
-      - { msg: "Missing kubeconform script", sh: "test -f {{.KUBECONFORM_SCRIPT}}" }
+      - {
+          msg: "Missing kubeconform script",
+          sh: "test -f {{.KUBECONFORM_SCRIPT}}",
+        }
 
   .reset:
     internal: true
@@ -41,3 +43,22 @@ tasks:
       - kubectl delete pod --all-namespaces --field-selector="status.phase!=Succeeded,status.phase!=Running"
       - kubectl delete pod --all-namespaces --field-selector=status.phase==Succeeded
 
+  secret:
+    desc: View secret
+    cmds:
+      - kubectl get secrets {{.name}} --template={{.prefix}}.data.{{.key}}{{.suffix}}
+
+  node-label:
+    desc: Add a label to node
+    cmds:
+      - kubectl label nodes {{.node}} {{.label}}
+
+  node-rm-label:
+    desc: Remove label from node
+    cmds:
+      - kubectl label nodes {{.node}} {{.label}}-
+
+  context:
+    desc: Change namespace context
+    cmds:
+      - kubectl config set-context --current --namespace={{.ns}}

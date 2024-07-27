@@ -4,7 +4,8 @@ version: "3"
 
 vars:
   ANSIBLE_LINT_FILE: "{{.ANSIBLE_DIR}}/.ansible-lint"
-  ANSIBLE_INVENTORY_FILE: "{{.ANSIBLE_DIR}}/{{.DEPLOY}}/hosts.yaml"
+  ANSIBLE_INVENTORY_FILE: "{{.ANSIBLE_DIR}}/{{.DEPLOY}}/hosts"
+  ANSIBLE_INVENTORY: "{{.ANSIBLE_DIR}}/{{.DEPLOY}}/hosts"
   ANSIBLE_REQUIREMENTS_FILE: "{{.ANSIBLE_DIR}}/requirements.yaml"
   ANSIBLE_PIP_REQUIREMENTS_FILE: "{{.ANSIBLE_DIR}}/requirements.txt"
 
@@ -79,7 +80,7 @@ tasks:
   ping:
     desc: Ping all the hosts
     deps: ["deps"]
-    cmd: "{{.VIRTUAL_ENV}}/bin/ansible kubernetes --inventory {{.ANSIBLE_INVENTORY_FILE}} --one-line -m 'ping'"
+    cmd: "{{.VIRTUAL_ENV}}/bin/ansible kubernetes --inventory {{.ANSIBLE_INVENTORY_FILE}} --one-line -m 'ping' {{.CLI_ARGS}}"
     preconditions:
       - {
           msg: "Missing Ansible inventory file",
