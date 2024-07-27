@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: cloudflared
@@ -28,24 +28,36 @@ spec:
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
+          configmap.reloader.stakater.com/reload: &config cloudflared-config
+          secret.reloader.stakater.com/reload: &secret cloudflared-secrets
         containers:
           app:
             image:
               repository: docker.io/cloudflare/cloudflared
-              tag: 2024.3.0
+              tag: 2024.6.1
             env:
               NO_AUTOUPDATE: true
-              TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
+              TUNNEL_CRED_FILE: &credentials-path /etc/cloudflared/credentials.json
               TUNNEL_METRICS: 0.0.0.0:8080
               TUNNEL_ORIGIN_ENABLE_HTTP2: true
               TUNNEL_TRANSPORT_PROTOCOL: quic
               TUNNEL_POST_QUANTUM: true
-              TUNNEL_ID: "${CF_TUNNEL_ID}"
-              TUNNEL_TOKEN: "${CF_TUNNEL_TOKEN}"
+              TUNNEL_ID:
+                valueFrom:
+                  secretKeyRef:
+                    name: *secret
+                    key: CF_TUNNEL_ID
+              TUNNEL_TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    name: *secret
+                    key: CF_TUNNEL_TOKEN
             args:
               - tunnel
               - --config
-              - /etc/cloudflared/config/config.yaml
+              - &config-path /etc/cloudflared/config.yaml
+              - --metrics
+              - 0.0.0.0:9090
               - run
               - "$(TUNNEL_ID)"
             probes:
@@ -55,7 +67,7 @@ spec:
                 spec:
                   httpGet:
                     path: /ready
-                    port: &port 8080
+                    port: &port 9090
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -95,15 +107,15 @@ spec:
     persistence:
       config:
         type: configMap
-        name: cloudflared-configmap
+        name: *config
         globalMounts:
-          - path: /etc/cloudflared/config/config.yaml
+          - path: *config-path
             subPath: config.yaml
             readOnly: true
-      creds:
-        type: configMap
-        name: cloudflared-credentials
+      credentials:
+        type: secret
+        name: *secret
         globalMounts:
-          - path: /etc/cloudflared/creds/credentials.json
+          - path: *credentials-path
             subPath: credentials.json
             readOnly: true

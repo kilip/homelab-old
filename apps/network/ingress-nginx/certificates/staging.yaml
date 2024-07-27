@@ -12,4 +12,3 @@ spec:
   dnsNames:
     - "${SECRET_TLD}"
     - "*.${SECRET_TLD}"
-    - "*.staging.${SECRET_TLD}"

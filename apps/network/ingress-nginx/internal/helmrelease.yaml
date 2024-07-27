@@ -1,8 +1,8 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: ingress-nginx-internal
+  name: &app nginx-internal
   namespace: network
 spec:
   interval: 30m
@@ -22,7 +22,7 @@ spec:
     remediation:
       retries: 3
   values:
-    fullnameOverride: ingress-nginx-internal
+    fullnameOverride: *app
     controller:
       replicaCount: 1
       service:
@@ -73,7 +73,7 @@ spec:
           labelSelector:
             matchLabels:
               app.kubernetes.io/name: ingress-nginx
-              app.kubernetes.io/instance: ingress-nginx-internal
+              app.kubernetes.io/instance: &app
               app.kubernetes.io/component: controller
       resources:
         requests:

@@ -3,7 +3,7 @@
 version: "3"
 
 vars:
-  DEPLOY: 'staging'
+  DEPLOY: "staging"
 
 tasks:
   startvm:
@@ -11,3 +11,8 @@ tasks:
     cmds:
       - vboxmanage startvm k8s-1 --type headless || exit 0
       - vboxmanage startvm k8s-2 --type headless || exit 0
+
+  push:
+    desc: Push to staging branch
+    cmds:
+      - git add . -A && git commit -am "wip" && git push origin staging
