@@ -1,11 +1,11 @@
-k8s-1 ansible_host=10.0.0.11
-k8s-2 ansible_host=10.0.0.12
+mars ansible_host=10.0.0.11
+hera ansible_host=10.0.0.12
 
 [controllers]
-k8s-1
+mars
 
 [workers]
-k8s-2
+hera
 
 [kubernetes:children]
 controllers

@@ -110,3 +110,17 @@ tasks:
       - task: an:run
         vars:
           playbook: cluster-prepare
+
+  install:
+    desc: Install kubernetes cluster
+    cmds:
+      - task: an:run
+        vars:
+          playbook: cluster-install
+
+  label:
+    desc: Configures kubernetes node labels
+    cmds:
+      - task: an:run
+        vars:
+          playbook: node-label

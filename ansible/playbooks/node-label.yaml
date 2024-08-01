@@ -1,0 +1,14 @@
+---
+- name: Configures node label
+  hosts: kubernetes
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Configure node label
+      ansible.builtin.command:
+        argv:
+          - kubectl
+          - label
+          - nodes
+          - hera
+          - disktype=tank
