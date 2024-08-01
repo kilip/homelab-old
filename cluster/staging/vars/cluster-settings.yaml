@@ -8,7 +8,7 @@ data:
   CLUSTER_NAME: olympus
   DEPLOY: staging
   GIT_BRANCH: staging
-  TIMEZONE: "Asia/Makassar"
+  TIMEZONE: "Etc/UTC"
   CLUSTER_CIDR: "10.69.0.0/16"
   NODE_CIDR: "10.10.10.0/24"
   GATEWAY_VIP: "10.10.10.101"
